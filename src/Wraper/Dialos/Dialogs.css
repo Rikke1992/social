@@ -1,0 +1,15 @@
+.dialogs{
+    display: flex;
+    flex-direction: column;
+width: 250px;
+background:  rgb(184, 59, 189);
+
+}
+.dialogs a{
+    
+text-decoration: none;
+    color: yellow;
+}
+wraper{
+    display: flex;
+}

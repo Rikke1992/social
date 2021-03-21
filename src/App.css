@@ -81,36 +81,4 @@ select {
   width: 100%;
 }
 
-header{
-  
-  display: flex;
-  background:  rgb(121, 170, 64);
-  width: 100%;
-  margin: 10px;
-  
-  
- 
-}
-header img{
-  max-width: 50px;
-  padding: 10px;
-}
-.wraper{
-display: flex;
 
-}
-.wraper nav{
-  width: 30%;
-  height: 100%;
-  margin: 10px;
-  padding-bottom: 100%;
-  background: rgb(121, 170, 64);
-}
-.wraper main{
-  width: 70%;
-}
-.wraper img{
-  width: 100%;
-  height: 300px;
-  margin: 10px;
-}
