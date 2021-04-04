@@ -1,6 +1,12 @@
+import React from "react";
 
+
+export let rerenderingDomTree = () => {
+
+};
 
 const state = {
+    postValue: '',
     peopls: [
         {
             id: 1,
@@ -31,9 +37,35 @@ const state = {
         img: 'https://media.licdn.com/dms/image/C560BAQFVPgY4cV4Knw/company-logo_200_200/0?e=2159024400&v=beta&t=CLgJ7rnh_gY-gG1akmPOVPN7wGtqe970Gcr2RoxOyIo',
         message: 'I`am Olha!',
         likes: '+100'
-    }]
-};
+    }],
+    post: [{
+        id: 1,
+        name: 'Jone',
+        text: 'Hi man'
+    },
+    {
+        id: 2,
+        name: 'Dan',
+        text: 'Hi. How are you?'
+    }],
 
+
+
+};
+export const newPost = (postMessage) => {
+    let newPostText = {
+        id: 11,
+        name: 'Vova',
+        text: postMessage
+    };
+    state.post.push(newPostText);
+    rerenderingDomTree(state)
+
+};
+export const subcribe = (observer) => {
+    rerenderingDomTree = observer
+    rerenderingDomTree()
+};
 
 export default state;
 

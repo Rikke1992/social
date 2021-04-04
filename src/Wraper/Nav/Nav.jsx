@@ -13,6 +13,7 @@ const Nav = () => {
                 <ul>
                     <li><NavLink to='/Message' >Message</NavLink></li>
                     <li> <NavLink to='/OPA!'>Sounds</NavLink></li>
+                    <li> <NavLink to='/post'>Post</NavLink></li>
                     <li>News</li>
                     <li>Music</li>
                     <li>Settings</li>

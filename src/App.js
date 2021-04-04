@@ -12,7 +12,7 @@ function App(props) {
       <Header />
       
       <Wraper state={props.state}/>
-      {/* <Wraper newMessage={props.newMessage} peopls={props.peopls}/> */}
+    
     </div >
   );
 }
