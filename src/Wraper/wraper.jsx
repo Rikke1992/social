@@ -25,7 +25,7 @@ const Wraper = (props) => {
 
         <Route path='/post' render={() => {
 
-          return (<Post newPost={props.newPost} state={props.state} />)
+          return (<Post subcribe={props.subcribe} newPost={props.newPost} state={props.state} dispatch={props.dispatch} />)
         }} />
 
         <Route path='/Message/1' component={() => {

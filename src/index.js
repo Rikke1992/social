@@ -1,12 +1,11 @@
-import React from 'react';
+import React from 'react'; 
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from "react-router-dom";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state, { subcribe } from './state';
-import newPost from './state';
-import rerenderingDomTree from './state';
+import store from './Redux/store';
+
 
 
 
@@ -16,7 +15,7 @@ export let reactRendering = () => {
       <React.StrictMode>
         <BrowserRouter>
   
-          <App   state={state} />
+          <App subcribe={store.subcribe}  store={store} dispatch={store.dispatch.bind(store)} />
   
         </BrowserRouter>
       </React.StrictMode>,
@@ -25,7 +24,7 @@ export let reactRendering = () => {
     ))
   };
 
-  reactRendering(state)
-  subcribe(reactRendering)
+  reactRendering(store)
+  store.subcribe(reactRendering)
 
 reportWebVitals();
