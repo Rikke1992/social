@@ -3,10 +3,10 @@ import React from "react";
 import wrp from './wraper.module.css';
 import { Route } from "react-router-dom";
 import Nav from "./Nav/Nav";
-import Message from "./Dialos/Message/Message";
-import Dialogs from "./Dialos/Dialogs";
+
+import DialogsItems from "./Dialos/DialogsItems";
 import Post from "./Post/Post";
-import PostRender from './Post/PostRender/PostRender';
+
 
 
 const Wraper = (props) => {
@@ -20,24 +20,18 @@ const Wraper = (props) => {
       <wraper>
         <Route path='/Message' render={() => {
 
-          return (<Dialogs peopls={props.state.peopls} />)
+          return (<DialogsItems dispatch={props.dispatch} state={props.state} Messages={props.state.Messages} peopls={props.state.Messages.peopls} />)
         }} />
 
         <Route path='/post' render={() => {
 
-          return (<Post subcribe={props.subcribe} newPost={props.newPost} state={props.state} dispatch={props.dispatch} />)
+          return (<Post store={props.store} state={props.state} dispatch={props.dispatch} />)
         }} />
 
-        <Route path='/Message/1' component={() => {
-          return (
-            <Message img={props.state.newMessage[0].img}
-              message={props.state.newMessage[0].message}
-              likes={props.state.newMessage[0].likes} />
-          )
-        }} />
-        <Route path='/Post' render={() => {
-          return (<PostRender state={props.state} />)
-        }}/>
+
+
+
+
 
 
 

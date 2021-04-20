@@ -1,6 +1,9 @@
 .Message{
+    
     display: inline-block;
     width: 100%;
+    z-index: 111;
+    
 }
 .Message img {
     max-width: 100px;

@@ -1,29 +1,36 @@
 import React from "react";
-import {reactRendering} from './../../index.js';
+
+
+const newPostTex = 'newPostTex';
+const OnChange = 'onChange';
+
+
 
 
 const Post = (props) => {
-    let newPostElement = React.createRef();
     
+    const postValue = props.state.Post.postValue;
+
+    let newPostElement = React.createRef();
+
     let onChange = () => {
         let value = newPostElement.current.value;
-        props.state.postValue = value
-        reactRendering(props.state)
-        props.subcribe(reactRendering)
+        props.dispatch({ type: OnChange, Value: value })
 
     };
-
     let Newtext = () => {
-        
-        
-
-        // newPost(value)
-        props.dispatch('newPostTex')
-        props.state.postValue = ''
-        
+        props.dispatch({ type: newPostTex })
     };
+    let renderPost = () => {
+        let render = props.state.Post.postItem.map((item) => {
 
-    return (<div><input type="text" ref={newPostElement} onChange={onChange} value={props.state.postValue} />
+            return (<div className={item.id}><h2>{item.name}</h2><p>{item.text}</p></div>)
+        });
+        return render
+    };
+    return (<div>
+        <div>{renderPost()}</div>
+        <input type="text" ref={newPostElement} onChange={onChange} value={postValue} />
         <button onClick={Newtext}>Post</button></div>
     )
 };

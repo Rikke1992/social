@@ -1,15 +1,41 @@
 import React from "react";
-import  './Message.css'
-
+import './Message.css'
 
 
 const Message = (props) => {
-    
+
+
+
+
+    let messageValue = props.state.Messages.messageValue;
+    let newPostElement = React.createRef();
+
+    let onChange = () => {
+        let value = newPostElement.current.value;
+        props.dispatch({ type: "OnChange", Value: value })
+
+        
+    };
+
+    let Newtext = () => {
+        props.dispatch({ type: 'newMessage', id:1 })
+        console.log(props.state.Messages.newMessage)
+    };
+    // let it = props.newMessage.filter((item) => {
+    //     return props.id == item.id
+    // });
+
+    // let RenderMessage = props.Messages.
     return (
-        <div className="Message">
-            <img src={props.img} alt="avatar" />
-            <p>{props.message}</p>
-            <strong>likes </strong>{props.likes}
+        <div>
+            {/* <div className="Message">
+                <img src={it[0].img} alt="avatar" />
+                <p>{it[0].message}</p>
+                <strong>likes </strong>{it[0].likes}
+            </div> */}
+            <div>
+                <input type="text" ref={newPostElement} onChange={onChange} value={messageValue} />
+                <button onClick={Newtext}>Отправить</button></div>
         </div>
     )
 };

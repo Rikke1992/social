@@ -11,7 +11,7 @@ function App(props) {
     <div className="App">
       <Header />
       
-      <Wraper subcribe={props.subcribe} state={props.store.state} dispatch={props.dispatch}/>
+      <Wraper store={props.store} state={props.state} dispatch={props.dispatch}/>
     
     </div >
   );
