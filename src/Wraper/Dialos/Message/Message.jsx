@@ -10,8 +10,9 @@ const Message = (props) => {
     let messageValue = props.state.Messages.messageValue;
     let newPostElement = React.createRef();
 
-    let onChange = () => {
-        let value = newPostElement.current.value;
+    let onChange = (e) => {
+        let value = e.target.value;
+        console.log(value)
         props.dispatch({ type: "OnChange", Value: value })
 
         

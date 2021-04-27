@@ -6,12 +6,7 @@ import PostsReducer from './PostsReducer';
 
 const store = {
     _state: {
-        rerenderingDomTree() {
-
-        },
-
-
-        Messages: {
+                Messages: {
             messageValue: '',
             newMessage: [{
                 id: 1,
@@ -66,17 +61,20 @@ const store = {
     getState() {
         return this._state
     },
+    rerenderingDomTree() {
+
+    },
     subcribe(observer) {
 
-        this._state.rerenderingDomTree = observer
-        return this._state.rerenderingDomTree()
+        this._rerenderingDomTree = observer
+        return this._rerenderingDomTree()
     },
 
     dispatch(action) {
-       this.getState.Post =  PostsReducer(this.getState().Post, action)
-        // DialogReducerRender(this.getState(), action)
+       this._state.Post =  PostsReducer(this._state.Post, action)
+        DialogReducerRender(this.getState(), action)
 
-        return this.getState().rerenderingDomTree()
+        return this._rerenderingDomTree(this._state)
     }
 };
 
