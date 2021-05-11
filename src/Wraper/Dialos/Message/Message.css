@@ -10,3 +10,7 @@
     max-height: 100px;
     border-radius: 50px;
 }
+.link {
+    display: flex;
+    color: yellow;
+}

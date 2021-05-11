@@ -1,6 +1,7 @@
 import { createStore, combineReducers } from "redux";
+import DialogReducerRender from "./DialogReducerRender";
 import PostsReducer from "./PostsReducer";
-import DialogReducerRender from "./PostsReducer";
+
 
 let reducers = combineReducers({
     Post: PostsReducer,

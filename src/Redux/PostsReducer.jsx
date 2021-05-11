@@ -1,46 +1,54 @@
 let initialState = {
-   
-        postValue: '',
-        postItem: [{
-            id: 1,
-            name: 'Jone',
-            text: 'Hi man'
-        },
-        {
-            id: 2,
-            name: 'Dan',
-            text: 'Hi. How are you?'
-        }]
-    
+
+    postValue: '',
+    postItem: [{
+        id: 1,
+        name: 'Jone',
+        text: 'Hi man'
+    },
+    {
+        id: 2,
+        name: 'Dan',
+        text: 'Hi. How are you?'
+    }]
+
 };
 
 const PostsReducer = (state = initialState, action) => {
-    
+
     switch (action.type) {
         case 'onChange': {
-            state.postValue = action.Value
-            return state
+            let newState ={...state};
+    
+            newState.postValue = action.Value
+           
+            
+            return newState
         }
             break;
         case 'newPostTex':
             {
-
+                let newState ={...state};
                 let newPostText = {
                     id: 11,
                     name: 'Vova',
                     text: state.postValue
                 };
+                
+                newState.postItem.push(newPostText);
+                newState.postValue = '';
 
-                state.postItem.push(newPostText);
-                state.postValue = ''
-                return state
+                return newState
 
             }
+
             break;
 
-
+        default: {
+            return state
+        }
     };
-    
+
 };
 
 export default PostsReducer;

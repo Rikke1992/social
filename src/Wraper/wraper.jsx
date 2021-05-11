@@ -5,7 +5,8 @@ import { Route } from "react-router-dom";
 import Nav from "./Nav/Nav";
 
 import DialogsItems from "./Dialos/DialogsItems";
-import Post from "./Post/Post";
+import PostContainer from "./Post/PostContainer";
+import DialogsContainer from "./Dialos/Message/DialogsContainer";
 
 
 
@@ -20,12 +21,12 @@ const Wraper = (props) => {
       <wraper>
         <Route path='/Message' render={() => {
 
-          return (<DialogsItems dispatch={props.dispatch} state={props.state} Messages={props.state.Messages} peopls={props.state.Messages.peopls} />)
+          return (<DialogsContainer  />)
         }} />
 
         <Route path='/post' render={() => {
 
-          return (<Post store={props.store} state={props.state} dispatch={props.dispatch} />)
+          return (<PostContainer />)
         }} />
 
 
