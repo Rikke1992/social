@@ -1,7 +1,7 @@
 import React from "react";
 import './Message.css'
 import { NavLink, Route } from "react-router-dom";
-import PeopleMessageContainer from "./PeopleMessageContainer";
+
 
 
 const Message = (props) => {

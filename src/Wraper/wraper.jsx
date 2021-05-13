@@ -4,7 +4,7 @@ import wrp from './wraper.module.css';
 import { Route } from "react-router-dom";
 import Nav from "./Nav/Nav";
 
-import DialogsItems from "./Dialos/DialogsItems";
+
 import PostContainer from "./Post/PostContainer";
 import DialogsContainer from "./Dialos/Message/DialogsContainer";
 
