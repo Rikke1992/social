@@ -62,11 +62,14 @@ const DialogReducerRender = (state = initialState, action) => {
         //     break;
 
         case "OnChange": {
+            
             let newState = {...state};
-            // newState.newMessage = [...newMessage];
-            // newState.peopls = [...peopls]
-            state.Messages.messageValue = action.Value
-            return state
+         
+            newState.newMessage = [...state.newMessage];
+            newState.peopls = [...state.peopls]
+            
+            newState.messageValue = action.Value
+            return newState
 
         }
             break;

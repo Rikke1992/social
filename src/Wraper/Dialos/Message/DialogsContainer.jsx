@@ -6,10 +6,7 @@ import Message from "./Message";
 const OnChange = 'OnChange';
 
 let MapStateToProps = (state) => {
-   console.log({
-    
-    Mes : state
-})
+   
 return {
 
     messageValue: state.Messages.messageValue,
