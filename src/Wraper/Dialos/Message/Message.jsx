@@ -13,26 +13,33 @@ const Message = (props) => {
             id = item.id
             return (
                 <div className='link'><NavLink to={To + item.id}>{item.name}</NavLink>
-                    <Route path={To + item.id} component={() => {
-                    return <PeopleMessageContainer id={item.id} />
-                }} />
+                   
                 </div>
             )
         });
         return render
     };
+    let messageValue = props.messageValue;
+    let newPostElement = React.createRef();
+
+    let onChange = () => {
+
+        let value = newPostElement.current.value;
+
+        props.OnChange(value)
 
 
-    // let messageValue = props.messageValue;
-    // let newPostElement = React.createRef();
+    };
 
-    // let onChange = () => {
-    //     let value = newPostElement.current.value;
-    //     console.log(value)
-    //     props.OnChange(value)
+    let renderDialog = () => {
 
 
-    // };
+
+        let res = props.newMessage[0].message.map((item) => {
+            return (<div id={item.id}>{item.message}</div>)
+        });
+        return res
+    };
 
 
     return (
@@ -40,11 +47,11 @@ const Message = (props) => {
             <div className='dialogs'>
                 {renderPost()}
             </div>
-
-            {/* <div>
+            <div>{renderDialog()}</div>
+            <div>
                 <input type="text" ref={newPostElement} onChange={onChange} value={messageValue} />
                 <button onClick={() => { }}>Отправить</button>
-            </div> */}
+            </div>
         </div>
     )
 };
