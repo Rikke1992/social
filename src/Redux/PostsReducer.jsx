@@ -29,6 +29,7 @@ const PostsReducer = (state = initialState, action) => {
         case 'newPostTex':
             {
                 let newState ={...state};
+                newState.postItem = [...state.postItem]
                 let newPostText = {
                     id: 11,
                     name: 'Vova',

@@ -5,26 +5,26 @@ let initialState = {
     messageValue: '',
     newMessage: [
         {
-        id: 1,
-        img: 'https://www.kino-teatr.ru/acter/photo/7/5/58857/962994.jpg',
-        message: [{
             id: 1,
-            message: 'I`am Muccaley Calcine!'
+            img: 'https://www.kino-teatr.ru/acter/photo/7/5/58857/962994.jpg',
+            message: [{
+                id: 1,
+                message: 'I`am Muccaley Calcine!'
+            }],
+            likes: 100
+        },
+        {
+            id: 2,
+            img: 'https://i.work.ua/sent_photo/3/f/b/3fbd713111982c5e75525843a3990ea2.jpg',
+            message: 'I`am Vladimir!',
+            likes: '+10050'
+        },
+        {
+            id: 3,
+            img: 'https://media.licdn.com/dms/image/C560BAQFVPgY4cV4Knw/company-logo_200_200/0?e=2159024400&v=beta&t=CLgJ7rnh_gY-gG1akmPOVPN7wGtqe970Gcr2RoxOyIo',
+            message: 'I`am Olha!',
+            likes: '+100'
         }],
-        likes: 100
-    },
-    {
-        id: 2,
-        img: 'https://i.work.ua/sent_photo/3/f/b/3fbd713111982c5e75525843a3990ea2.jpg',
-        message: 'I`am Vladimir!',
-        likes: '+10050'
-    },
-    {
-        id: 3,
-        img: 'https://media.licdn.com/dms/image/C560BAQFVPgY4cV4Knw/company-logo_200_200/0?e=2159024400&v=beta&t=CLgJ7rnh_gY-gG1akmPOVPN7wGtqe970Gcr2RoxOyIo',
-        message: 'I`am Olha!',
-        likes: '+100'
-    }],
     peopls: [
         {
             id: 1,
@@ -62,18 +62,20 @@ const DialogReducerRender = (state = initialState, action) => {
         //     break;
 
         case "OnChange": {
-            
-            let newState = {...state};
-         
-            newState.newMessage = [...state.newMessage];
-            newState.peopls = [...state.peopls]
-            
+
+            let newState = {
+                ...state,
+                newMessage: [...state.newMessage],
+                peopls: [...state.peopls]
+            };
+
+
             newState.messageValue = action.Value
             return newState
 
         }
             break;
-            
+
         default: {
             return state
         }
