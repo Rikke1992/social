@@ -20,10 +20,6 @@ const Post = (props) => {
 
         props.Newtext()
     };
-
-
-
-
     return (<div>
         <div>{renderPost()}</div>
         <input type="text" ref={newPostElement} onChange={onChange} value={props.postValue} />
