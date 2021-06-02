@@ -4,7 +4,7 @@ import React from "react";
 
 const Profile = (props) => {
 
-    debugger;
+    
     if (props.profileItems.length == 0) {
         axios.get('https://social-network.samuraijs.com/api/1.0/users')
             .then(respons => props.setUsers(respons.data.items))

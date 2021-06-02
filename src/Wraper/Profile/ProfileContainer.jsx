@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Profile from "./Profile";
+import ProfileClass from "./ProfileClass";
 
 let MapStateToProps = (state) => {
 
@@ -31,6 +32,6 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 
-const ProfileContainer = connect(MapStateToProps, mapDispatchToProps)(Profile);
+const ProfileContainer = connect(MapStateToProps, mapDispatchToProps)(ProfileClass);
 
 export default ProfileContainer;
