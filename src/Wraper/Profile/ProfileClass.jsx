@@ -1,33 +1,33 @@
 import * as axios from "axios";
 import React from "react";
+import './profile.css';
+import Users from "./Users";
+
 
 
 class ProfileClass extends React.Component {
-    constructor(props) {
-        super(props);
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+    
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(respons => this.props.setUsers(respons.data.items))
     }
 
-    // getUsers = ()=>{
-    //     if (this.props.profileItems.length == 0) {
-    //         axios.get('https://social-network.samuraijs.com/api/1.0/users')
-    //             .then(respons => this.props.setUsers(respons.data.items))
-
-    //     }
-    // }
+    onPageChanged = (pageNumber) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(respons => this.props.setUsers(respons.data.items))
+    }
     render() {
-        return (<div>
-            {this.props.profileItems.map((item) => {
-                return (<div>
-                    <div><span>{item.name}</span>
-                        <img src="https://ps.w.org/cbxuseronline/assets/icon-256x256.png?rev=2284897" alt="" />
-
-                    </div>{item.id}
-                </div>)
-
-            })}
-        </div>)
+      
+        return (
+        <Users currentPage={this.props.currentPage}
+            totalCount={this.props.totalCount}
+            pageSize={this.props.pageSize}
+            Profile={this.props.Profile}
+            profileItems={this.props.profileItems}
+            onPageChanged={this.onPageChanged}
+        />)
+    
 
     }
 }

@@ -1,6 +1,9 @@
 let initialState = {
     ProfileItems: [],
-    postValue: ''
+    postValue: '',
+    pageSize: 10,
+    totalCount: 50,
+    currentPage : 1
 
 };
 
@@ -37,6 +40,8 @@ const ProfileReducer = (state = initialState, action) => {
             return newState
 
         }
+        break;
+
         case 'setUsers': {
             let newState = { ...state };
             newState.ProfileItems = [...action.newState]
@@ -44,6 +49,12 @@ const ProfileReducer = (state = initialState, action) => {
 
             return newState
         }
+            break;
+            case 'setCurrentPage':{
+                let newState = { ...state, ProfileItems:[...state.ProfileItems] };
+                newState.currentPage =  action.page 
+                return newState
+            }
             break;
         default: { return state }
     }
