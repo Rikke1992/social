@@ -11,6 +11,7 @@ const Nav = () => {
         <div className={wrp.wraper}>
             <nav>
                 <ul>
+                    <li><NavLink to='/Profile' >Profile</NavLink></li>
                     <li><NavLink to='/Users' >Users</NavLink></li>
                     <li><NavLink to='/Message' >Message</NavLink></li>
                     <li> <NavLink to='/OPA!'>Sounds</NavLink></li>
