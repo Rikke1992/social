@@ -7,7 +7,7 @@ import Nav from "./Nav/Nav";
 
 import PostContainer from "./Post/PostContainer";
 import DialogsContainer from "./Dialos/Message/DialogsContainer";
-import ProfileContainer from "./Profile/ProfileContainer";
+import UsersContainer from "./Users/UsersContainer";
 
 
 
@@ -20,9 +20,9 @@ const Wraper = (props) => {
 
       <Nav />
       <wraper>
-        <Route path='/Profile' render={() => {
+        <Route path='/Users' render={() => {
 
-          return (<ProfileContainer />)
+          return (<UsersContainer />)
         }} />
         <Route path='/Message' render={() => {
 

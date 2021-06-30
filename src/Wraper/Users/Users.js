@@ -1,6 +1,8 @@
 
 import React from "react";
 import './profile.css';
+import Preloader from "./../../Image/Preloader.gif";
+import { NavLink } from "react-router-dom";
 
 const Users = (props) => {
 
@@ -13,18 +15,22 @@ const Users = (props) => {
     return (<div>
 
         <div>{pages.map((item) => {
-            return <span className={item === props.currentPage ? 'strong' : 'normal'}
-                onClick={() => { props.onPageChanged(item); }}>{item}</span>
-        })}</div>
+            if (item == props.currentPage - 1 || item == props.currentPage || item == props.currentPage + 1) {
+                return <span className={item === props.currentPage ? 'strong' : 'normal'}
+                    onClick={() => { props.onPageChanged(item); }}>{item}</span>
+            }
+        }
+
+        )}</div>
 
 
         {props.profileItems.map((item) => {
-            return (<div>
+            return (<div><NavLink to='/OPA!' >
                 <div><span>{item.name}</span>
                     <img src="https://ps.w.org/cbxuseronline/assets/icon-256x256.png?rev=2284897" alt="" />
 
                 </div>{item.id}
-            </div>)
+            </NavLink> </div>)
 
         })}
     </div>)
