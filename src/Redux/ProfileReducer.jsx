@@ -16,11 +16,12 @@ let initialState = {
 };
 
 const ProfileReducer = (state = initialState, action) => {
-    
+
     switch (action.type) {
         case 'SetUserProfile': {
-            let newState ={...state};
-            newState.myProfile.photos = {...state.myProfile.photos}
+            let newState = { ...state };
+            newState.myProfile.photos = { ...state.myProfile.photos }
+            { 'тут остановился!!!!ПРодолжай клепать этот диспатч' }
 
         }
 
