@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from "redux";
 import DialogReducerRender from "./DialogReducerRender";
 import PostsReducer from "./PostsReducer";
-import ProfileReducer from "./Profile";
+import ProfileReducer from "./ProfileReducer";
 import UsersReducer from "./UsersReducer";
 
 let reducers = combineReducers({
@@ -12,7 +12,7 @@ let reducers = combineReducers({
 });
 
 let store = createStore(reducers);
-
+ 
 
 
 export default store;

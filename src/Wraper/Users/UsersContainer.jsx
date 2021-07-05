@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import Users from "./Users";
 import * as axios from "axios";
-import './profile.css';
+
 import UsersClass from "./UsersClass";
 import { toogleFetching, setCurrentPage, setUsers } from '../../Redux/UsersReducer';
 // class ProfileClass extends React.Component {
@@ -40,6 +39,7 @@ let MapStateToProps = (state) => {
         totalCount: state.Users.totalCount,
         currentPage: state.Users.currentPage,
         isFetching: state.Users.isFetching
+
 
 
         // postValue: state.Profile.postValue

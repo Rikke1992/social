@@ -1,6 +1,6 @@
 import * as axios from "axios";
 import React from "react";
-import './profile.css';
+import './UsersStyle.css';
 import Users from "./Users";
 
 import PreloaderItem from "../../commond/Preloader";

@@ -1,8 +1,9 @@
 
 import React from "react";
-import './profile.css';
+
 import Preloader from "./../../Image/Preloader.gif";
 import { NavLink } from "react-router-dom";
+import Profile from "./../Profile/Profile"
 
 const Users = (props) => {
 
@@ -25,7 +26,7 @@ const Users = (props) => {
 
 
         {props.profileItems.map((item) => {
-            return (<div><NavLink to='/OPA!' >
+            return (<div><NavLink to={"/Profile/" + item.id} >
                 <div><span>{item.name}</span>
                     <img src="https://ps.w.org/cbxuseronline/assets/icon-256x256.png?rev=2284897" alt="" />
 
