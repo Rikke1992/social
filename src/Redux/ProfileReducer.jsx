@@ -1,3 +1,4 @@
+
 let initialState = {
 
     myProfile: {
@@ -16,21 +17,27 @@ let initialState = {
 };
 
 const ProfileReducer = (state = initialState, action) => {
-
+    console.log(action)
     switch (action.type) {
+
         case 'SetUserProfile': {
+
             let newState = { ...state };
             newState.myProfile.photos = { ...state.myProfile.photos }
-            { 'тут остановился!!!!ПРодолжай клепать этот диспатч' }
+            newState.profils = action.users
+
+            return newState
+
 
         }
+            break;
 
-        default: {
-            return state
-        }
-    };
+        default: { return state }
+    }
 
 
 };
+
+export const SetUserProfile = (users) => ({ type: "SetUserProfile", users: users });
 
 export default ProfileReducer;
