@@ -1,4 +1,4 @@
-
+const Set_User_Profile = 'SetUserProfile';
 let initialState = {
 
     myProfile: {
@@ -17,17 +17,16 @@ let initialState = {
 };
 
 const ProfileReducer = (state = initialState, action) => {
-    console.log(action)
+ 
     switch (action.type) {
 
-        case 'SetUserProfile': {
-
-            let newState = { ...state };
-            newState.myProfile.photos = { ...state.myProfile.photos }
-            newState.profils = action.users
+        case Set_User_Profile: {
+            
+            let newState = { ...state, profils : action.profile };
+           
+            
 
             return newState
-
 
         }
             break;
@@ -38,6 +37,6 @@ const ProfileReducer = (state = initialState, action) => {
 
 };
 
-export const SetUserProfile = (users) => ({ type: "SetUserProfile", users: users });
+export const SetUserProfile = (profile) => ({ type: Set_User_Profile, profile  });
 
 export default ProfileReducer;

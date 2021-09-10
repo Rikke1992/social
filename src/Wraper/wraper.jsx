@@ -21,7 +21,7 @@ const Wraper = (props) => {
 
       <Nav />
       <wraper>
-        <Route path='/Profile' render={() => {
+        <Route path='/Profile/:userId' render={() => {
           return (<ProfileContainer />)
         }} />
 
