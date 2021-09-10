@@ -1,65 +1,43 @@
+
 let initialState = {
-    ProfileItems: [],
-    postValue: '',
-    pageSize: 10,
-    totalCount: 50,
-    currentPage : 1
+
+    myProfile: {
+        "name": "Vladimir",
+        "id": 1,
+        "uniqueUrlName": 'MyPage',
+        "photos": {
+            "small": 'https://cdn.vox-cdn.com/thumbor/3m4VtSKbEajAGmk_grV86XDps_Y=/0x0:2842x1470/1400x1050/filters:focal(1209x317:1663x771):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/53961065/bossbabycover.0.jpg',
+            "large": 'https://parfumglamour.com/files/products/Hugo-Boss-Boss-Bottled-Absolute-poster.1000x1000.jpg?48b1022706608df4f6c4d5f2417a0567'
+        },
+        "status": null,
+        "followed": false
+    },
+    profils: null
 
 };
 
-
-
 const ProfileReducer = (state = initialState, action) => {
-
+    console.log(action)
     switch (action.type) {
 
-        case 'change': {
-
-            let newState = { ...state, dialog: [...state.ProfileItems.dialog] };
-            newState.postValue = action.value
-
-            return newState
-
-        }
-            break;
-
-        case "click": {
+        case 'SetUserProfile': {
 
             let newState = { ...state };
-            newState.ProfileItems.dialog = [...state.ProfileItems.dialog];
-            let newDialog = {
-                id: 2,
-                profileMessage: state.postValue
-            };
-
-            newState.ProfileItems.dialog.push(newDialog)
-
-            newState.postValue = ''
-
+            newState.myProfile.photos = { ...state.myProfile.photos }
+            newState.profils = action.users
 
             return newState
 
-        }
-        break;
 
-        case 'setUsers': {
-            let newState = { ...state };
-            newState.ProfileItems = [...action.newState]
-            console.log(newState)
-
-            return newState
         }
             break;
-            case 'setCurrentPage':{
-                let newState = { ...state, ProfileItems:[...state.ProfileItems] };
-                newState.currentPage =  action.page 
-                return newState
-            }
-            break;
+
         default: { return state }
     }
 
+
 };
 
+export const SetUserProfile = (users) => ({ type: "SetUserProfile", users: users });
+
 export default ProfileReducer;
-const setUsers = () => { };

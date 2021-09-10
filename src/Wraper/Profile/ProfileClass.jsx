@@ -1,35 +1,31 @@
-import * as axios from "axios";
+// 'Доделать завтра профиль и далее реализовать загрзку профиля при клике на userov'
 import React from "react";
-import './profile.css';
-import Users from "./Users";
-
-
+import Profile from "./Profile";
+import * as axios from "axios";
 
 class ProfileClass extends React.Component {
-    
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(respons => this.props.setUsers(respons.data.items))
-    }
 
-    onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(respons => this.props.setUsers(respons.data.items))
+    componentDidMount() {
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+            .then(respons => {
+                console.log(respons.data)
+                this.props.SetUserProfile(respons.data);
+                debugger;
+            })
+
     }
     render() {
-      
-        return (
-        <Users currentPage={this.props.currentPage}
-            totalCount={this.props.totalCount}
-            pageSize={this.props.pageSize}
-            Profile={this.props.Profile}
-            profileItems={this.props.profileItems}
-            onPageChanged={this.onPageChanged}
-        />)
-    
+        return <Profile
+            //  {...this.props}
+            name={this.props.name}
+            photoLarge={this.props.photoLarge}
+            followed={this.props.followed}
+        />
 
     }
+
+
 }
 
 export default ProfileClass;
