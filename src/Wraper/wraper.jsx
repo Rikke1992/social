@@ -21,8 +21,11 @@ const Wraper = (props) => {
 
       <Nav />
       <wraper>
-        <Route path='/Profile/:userId' render={() => {
-          return (<ProfileContainer />)
+        
+        <Route path='/Profile/:userId' 
+        render={() => {
+          
+          return (< ProfileContainer/>)
         }} />
 
         <Route path='/Users' render={() => {

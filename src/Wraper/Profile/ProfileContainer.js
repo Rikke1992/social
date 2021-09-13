@@ -8,51 +8,34 @@ import { withRouter } from "react-router-dom";
 
 
 class ProfileContainer extends React.Component {
-  
+ 
   componentDidMount() {
-  debugger
- /*  десь нужно реализоать нужную ссылку при выборе юзера 
-  плюс в презентационной компоненте переделать все под 
-  получение параметров и их прорисовку */
-      axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
-          .then(respons => {
+ 
+  /* let userId = this.props.match.params.userId;
+  if (!userId){
+    userId = 2;
+  }
+   */
+      axios.get(`https://social-network.samuraijs.com/api/1.0/profile/5` )
+          .then(response => {
             
-              this.props.SetUserProfile(respons.data);
+              this.props.SetUserProfile(response.data);
            
-          })
+          });
 
   }
   render() {
-      return <Profile
-            {...this.props}
-         
-      />
+    
+      return <Profile {...this.props} profils= {this.props.profils}/>
 
   }
-
-
 }
 
 let MapStateToProps = (state) => {
 
-  return ({
-    name: state.Profile.myProfile.name,
-    photoLarge: state.Profile.myProfile.photos.large,
-    followed: state.Profile.myProfile.followed,
-    profils: state.Profile.profils,
-    state: state
-  })
+  return ({profils: state.Profile.profils})
 };
 
-/* let mapDispatchToProps = (dispatch) => {
-  return {
-    SetUserProfile: (users) => {
-
-      dispatch({ type: 'SetUserProfile', users })
-
-    }
-  }`
-}; */
 
 
 let WithUrlDataProfileContainer = withRouter(ProfileContainer);

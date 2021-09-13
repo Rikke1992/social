@@ -18,7 +18,7 @@ const UsersReducer = (state = initialState, action) => {
             let newState = { ...state };
             newState.ProfileItems = [...action.newState.items]
             newState.totalCount = action.newState.totalCount
-            console.log(action)
+            
 
             return newState
         }
