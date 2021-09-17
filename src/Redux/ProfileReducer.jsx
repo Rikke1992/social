@@ -1,31 +1,39 @@
-const Set_User_Profile = 'SetUserProfile';
+const Set_User_Profile = "SetUserProfile";
 let initialState = {
-
-    profils : null
-
+  profils: { isFetching: true, user: null },
 };
 
 const ProfileReducer = (state = initialState, action) => {
- 
-    switch (action.type) {
+  switch (action.type) {
+    case "SetUserProfile":
+      {
+        let newState = { profils: { ...state.profils } };
+        newState.profils.user = action.profile;
 
-        case 'SetUserProfile': {
-             
-            let newState = state.profils = action.profile ;
-          
-            
+        return newState;
+      }
+      break;
+    case "toogleFetching":
+      {
+        let newState = { ...state, profils: { ...state.profils } };
+        newState.profils.isFetching = action.fetching;
+        return newState;
+      }
 
-            return newState
-
-        }
-            break;
-
-        default: { return state }
+      break;
+    default: {
+      return state;
     }
-
-
+  }
 };
 
-export const SetUserProfile = (profile) => ({ type: 'SetUserProfile', profile  });
+export const SetUserProfile = (profile) => ({
+  type: "SetUserProfile",
+  profile,
+});
+export const toogleFetching = (itemFetching) => ({
+  type: "toogleFetching",
+  fetching: itemFetching,
+});
 
 export default ProfileReducer;
