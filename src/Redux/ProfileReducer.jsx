@@ -1,43 +1,39 @@
-
+const Set_User_Profile = "SetUserProfile";
 let initialState = {
-
-    myProfile: {
-        "name": "Vladimir",
-        "id": 1,
-        "uniqueUrlName": 'MyPage',
-        "photos": {
-            "small": 'https://cdn.vox-cdn.com/thumbor/3m4VtSKbEajAGmk_grV86XDps_Y=/0x0:2842x1470/1400x1050/filters:focal(1209x317:1663x771):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/53961065/bossbabycover.0.jpg',
-            "large": 'https://parfumglamour.com/files/products/Hugo-Boss-Boss-Bottled-Absolute-poster.1000x1000.jpg?48b1022706608df4f6c4d5f2417a0567'
-        },
-        "status": null,
-        "followed": false
-    },
-    profils: null
-
+  profils: { isFetching: true, user: null },
 };
 
 const ProfileReducer = (state = initialState, action) => {
-    console.log(action)
-    switch (action.type) {
+  switch (action.type) {
+    case "SetUserProfile":
+      {
+        let newState = { profils: { ...state.profils } };
+        newState.profils.user = action.profile;
 
-        case 'SetUserProfile': {
+        return newState;
+      }
+      break;
+    case "toogleFetching":
+      {
+        let newState = { ...state, profils: { ...state.profils } };
+        newState.profils.isFetching = action.fetching;
+        return newState;
+      }
 
-            let newState = { ...state };
-            newState.myProfile.photos = { ...state.myProfile.photos }
-            newState.profils = action.users
-
-            return newState
-
-
-        }
-            break;
-
-        default: { return state }
+      break;
+    default: {
+      return state;
     }
-
-
+  }
 };
 
-export const SetUserProfile = (users) => ({ type: "SetUserProfile", users: users });
+export const SetUserProfile = (profile) => ({
+  type: "SetUserProfile",
+  profile,
+});
+export const toogleFetching = (itemFetching) => ({
+  type: "toogleFetching",
+  fetching: itemFetching,
+});
 
 export default ProfileReducer;

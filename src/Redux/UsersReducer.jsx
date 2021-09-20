@@ -18,7 +18,7 @@ const UsersReducer = (state = initialState, action) => {
             let newState = { ...state };
             newState.ProfileItems = [...action.newState.items]
             newState.totalCount = action.newState.totalCount
-            console.log(action)
+            
 
             return newState
         }
@@ -45,7 +45,7 @@ const UsersReducer = (state = initialState, action) => {
 };
 export const toogleFetching = (itemFetching) => ({ type: 'toogleFetching', fetching: itemFetching });
 export const setCurrentPage = (item) => ({ type: 'setCurrentPage', page: item });
-export const setUsers = (newState) => ({ type: 'setUsers', newState: newState });
+export const setUsers = (newState) => ({ type: 'setUsers', newState });
 
 
 export default UsersReducer;

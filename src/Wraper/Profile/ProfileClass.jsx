@@ -1,31 +1,11 @@
-// 'Доделать завтра профиль и далее реализовать загрзку профиля при клике на userov'
-import React from "react";
-import Profile from "./Profile";
-import * as axios from "axios";
+/* import React from "react";
+import ProfileContainer from "./ProfileContainer";
+import {SetUserProfile} from "./../../Redux/ProfileReducer";
 
-class ProfileClass extends React.Component {
+let MapStateToProps = (state) => {
 
-    componentDidMount() {
+  return ({profils: state.Profile.profils})
+};
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
-            .then(respons => {
-                console.log(respons.data)
-                this.props.SetUserProfile(respons.data);
-                debugger;
-            })
-
-    }
-    render() {
-        return <Profile
-            //  {...this.props}
-            name={this.props.name}
-            photoLarge={this.props.photoLarge}
-            followed={this.props.followed}
-        />
-
-    }
-
-
-}
-
-export default ProfileClass;
+let WithUrlDataProfileContainer = withRouter(ProfileContainer);
+export default connect(MapStateToProps,{ SetUserProfile})(WithUrlDataProfileContainer); */
