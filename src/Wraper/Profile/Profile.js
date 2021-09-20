@@ -2,14 +2,13 @@ import React from "react";
 import PreloaderItem from "../../commond/Preloader";
 
 const Profile = (props) => {
-  return (
+  return props.Profile.user ? (
     <div>
-      <span>{props.profils.user.fullName}</span>
-      <div>
-        <img src={props.profils.user.photos.large}></img>
-        <span>Followed</span>
-      </div>
+      <span>{props.Profile.user.fullName}</span>
+      <img src={props.Profile.user.photos.large}></img>
     </div>
+  ) : (
+    <PreloaderItem />
   );
 };
 
