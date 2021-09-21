@@ -2,7 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import * as axios from "axios";
 import UsersClass from "./UsersClass";
-import { toogleFetching, setCurrentPage, setUsers } from '../../Redux/UsersReducer';
+import {
+  toogleFetching,
+  setCurrentPage,
+  setUsers,
+  follow,
+  Unfollow,
+} from "../../Redux/UsersReducer";
 // class ProfileClass extends React.Component {
 
 //     componentDidMount() {
@@ -26,21 +32,17 @@ import { toogleFetching, setCurrentPage, setUsers } from '../../Redux/UsersReduc
 //                 onPageChanged={this.onPageChanged}
 //             />)
 
-
 //     }
 // }
 let MapStateToProps = (state) => {
-
-    return {
-        profileItems: state.Users.ProfileItems,
-        Profile: state.Users,
-        pageSize: state.Users.pageSize,
-        totalCount: state.Users.totalCount,
-        currentPage: state.Users.currentPage,
-        isFetching: state.Users.isFetching
-
-
-    }
+  return {
+    profileItems: state.Users.ProfileItems,
+    Profile: state.Users,
+    pageSize: state.Users.pageSize,
+    totalCount: state.Users.totalCount,
+    currentPage: state.Users.currentPage,
+    isFetching: state.Users.isFetching,
+  };
 };
 
 // let mapDispatchToProps = (dispatch) => {
@@ -60,6 +62,12 @@ let MapStateToProps = (state) => {
 //     }
 // };
 
-const UsersContainer = connect(MapStateToProps, { toogleFetching, setCurrentPage, setUsers })(UsersClass);
+const UsersContainer = connect(MapStateToProps, {
+  follow,
+  Unfollow,
+  toogleFetching,
+  setCurrentPage,
+  setUsers,
+})(UsersClass);
 
 export default UsersContainer;

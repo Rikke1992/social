@@ -61,7 +61,25 @@ const Users = (props) => {
                 />
               </div>
               {item.id}
-            </NavLink>{" "}
+            </NavLink>
+
+            {item.followed ? (
+              <button
+                onClick={() => {
+                  props.Unfollow(item.id);
+                }}
+              >
+                follow
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  props.follow(item.id);
+                }}
+              >
+                Unfollow
+              </button>
+            )}
           </div>
         );
       })}

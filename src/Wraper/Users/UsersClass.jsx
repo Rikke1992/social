@@ -18,6 +18,13 @@ class UsersClass extends React.Component {
       });
   }
 
+  follow = (id) => {
+    this.props.follow(id);
+  };
+  Unfollow = (id) => {
+    this.props.Unfollow(id);
+  };
+
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
     this.props.toogleFetching(true);
@@ -42,6 +49,8 @@ class UsersClass extends React.Component {
           profileItems={this.props.profileItems}
           onPageChanged={this.onPageChanged}
           isFetching={this.props.isFetching}
+          follow={this.props.follow}
+          Unfollow={this.props.Unfollow}
         />
       </>
     );
