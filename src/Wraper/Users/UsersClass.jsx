@@ -4,18 +4,17 @@ import "./UsersStyle.css";
 import Users from "./Users";
 
 import PreloaderItem from "../../commond/Preloader";
-
+import { componentDidMountAxios, onPageChangedAxios } from "../../API/api";
+//this.props.currentPage  this.props.pageSize
 class UsersClass extends React.Component {
   componentDidMount() {
     this.props.toogleFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-      .then((respons) => {
-        this.props.setUsers(respons.data);
+    componentDidMountAxios(this.props.currentPage, this.props.pageSize).then(
+      (data) => {
+        this.props.setUsers(data);
         this.props.toogleFetching(false);
-      });
+      }
+    );
   }
 
   follow = (id) => {
@@ -28,14 +27,11 @@ class UsersClass extends React.Component {
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
     this.props.toogleFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
-      )
-      .then((respons) => {
-        this.props.setUsers(respons.data);
-        this.props.toogleFetching(false);
-      });
+
+    onPageChangedAxios(pageNumber, this.props.pageSize).then((data) => {
+      this.props.setUsers(data);
+      this.props.toogleFetching(false);
+    });
   };
   render() {
     return (
