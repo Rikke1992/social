@@ -1,19 +1,15 @@
+import "./App.css";
+import HeaderContainer from "./Header/HeaderContainer";
 
-import './App.css';
-import Header from './Header/Header';
-import Wraper from './Wraper/wraper.jsx';
-
+import Wraper from "./Wraper/wraper.jsx";
 
 function App(props) {
-
   return (
-
     <div className="App">
-      <Header />
-      
+      <HeaderContainer />
+
       <Wraper />
-    
-    </div >
+    </div>
   );
 }
 

@@ -10,19 +10,18 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId;
     if (!userId) {
-      userId = 2;
+      userId = 19743;
     }
     this.props.toogleFetching(true);
 
     axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+      .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
       .then((response) => this.props.SetProfile(response.data));
     this.props.toogleFetching(false);
   }
   render() {
     return (
       <>
-        {/* {this.props.toogleFetching(true) ? <PreloaderItem /> : null} */}
         <Profile {...this.props} />
       </>
     );

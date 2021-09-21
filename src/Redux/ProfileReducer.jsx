@@ -4,6 +4,7 @@ let initialState = {
 };
 
 const ProfileReducer = (state = initialState, action) => {
+  console.log("ProfileReducer", action);
   switch (action.type) {
     case "SetProfile":
       {
@@ -29,10 +30,16 @@ const ProfileReducer = (state = initialState, action) => {
   }
 };
 
-export const toogleFetching = (itemFetching) => ({
-  type: "toogleFetching",
-  itemFetching,
-});
+export const toogleFetching = (itemFetching) => {
+  console.log("itemFetching>>", itemFetching);
+  return {
+    type: "toogleFetching",
+    itemFetching,
+  };
+};
 
-export const SetProfile = (profile) => ({ type: "SetProfile", profile });
+export const SetProfile = (profile) => {
+  console.log("profile>>", profile);
+  return { type: "SetProfile", profile };
+};
 export default ProfileReducer;

@@ -1,14 +1,14 @@
-header{
-  
-    display: flex;
-    background:  rgb(121, 170, 64);
-    width: 100%;
-    margin: 10px;
-    
-    
-   
-  }
-  header img{
-    max-width: 50px;
-    padding: 10px;
-  }
+header {
+  display: flex;
+  background: rgb(121, 170, 64);
+  width: 100%;
+  margin: 10px;
+}
+header img {
+  max-width: 50px;
+  padding: 10px;
+}
+.login {
+  color: red;
+  margin-left: 80%;
+}
