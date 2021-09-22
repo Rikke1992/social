@@ -5,10 +5,36 @@ let initialState = {
   totalCount: 50,
   currentPage: 1,
   isFetching: true,
+  isFollow: [],
 };
 
 const UsersReducer = (state = initialState, action) => {
+  console.log("UsersReducer>>>" + action.type);
   switch (action.type) {
+    case "isFollow":
+      {
+        let newState = {
+          ...state,
+          isFollow: [...state.isFollow, action.answer],
+        };
+
+        return newState;
+      }
+      break;
+    case "isUnFollow":
+      {
+        let newState = {
+          ...state,
+          isFollow: state.isFollow.map((item) => {
+            if (item != action.answer) {
+              return item;
+            }
+          }),
+        };
+
+        return newState;
+      }
+      break;
     case "follow":
       {
         let newState = {
@@ -74,6 +100,12 @@ const UsersReducer = (state = initialState, action) => {
       return state;
     }
   }
+};
+export const isUnFollowUp = (answer) => {
+  return { type: "isUnFollow", answer };
+};
+export const isFollowUp = (answer) => {
+  return { type: "isFollow", answer };
 };
 export const follow = (id) => ({
   type: "follow",

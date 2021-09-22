@@ -8,6 +8,8 @@ import {
   setUsers,
   follow,
   Unfollow,
+  isFollowUp,
+  isUnFollowUp,
 } from "../../Redux/UsersReducer";
 // class ProfileClass extends React.Component {
 
@@ -42,6 +44,7 @@ let MapStateToProps = (state) => {
     totalCount: state.Users.totalCount,
     currentPage: state.Users.currentPage,
     isFetching: state.Users.isFetching,
+    isFollow: state.Users.isFollow,
   };
 };
 
@@ -68,6 +71,8 @@ const UsersContainer = connect(MapStateToProps, {
   toogleFetching,
   setCurrentPage,
   setUsers,
+  isFollowUp,
+  isUnFollowUp,
 })(UsersClass);
 
 export default UsersContainer;

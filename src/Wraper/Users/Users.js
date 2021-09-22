@@ -66,7 +66,9 @@ const Users = (props) => {
 
             {item.followed ? (
               <button
+                disabled={props.isFollow.some((it) => it == item.id)}
                 onClick={() => {
+                  props.isFollowUp(item.id);
                   axios
                     .delete(
                       `https://social-network.samuraijs.com/api/1.0/follow/${item.id}`,
@@ -80,6 +82,7 @@ const Users = (props) => {
                     .then((response) => {
                       if (response.data.resultCode == 0) {
                         props.Unfollow(item.id);
+                        props.isUnFollowUp(item.id);
                       }
                     });
                 }}
@@ -88,7 +91,9 @@ const Users = (props) => {
               </button>
             ) : (
               <button
+                disabled={props.isFollow.some((it) => it == item.id)}
                 onClick={() => {
+                  props.isFollowUp(item.id);
                   axios
                     .post(
                       `https://social-network.samuraijs.com/api/1.0/follow/${item.id}`,
@@ -103,6 +108,7 @@ const Users = (props) => {
                     .then((response) => {
                       if (response.data.resultCode == 0) {
                         props.follow(item.id);
+                        props.isUnFollowUp(item.id);
                       }
                     });
                 }}

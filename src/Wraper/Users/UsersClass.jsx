@@ -33,21 +33,12 @@ class UsersClass extends React.Component {
       this.props.toogleFetching(false);
     });
   };
+
   render() {
     return (
       <>
         {this.props.Profile.isFetching ? <PreloaderItem /> : null}
-        <Users
-          currentPage={this.props.currentPage}
-          totalCount={this.props.totalCount}
-          pageSize={this.props.pageSize}
-          Profile={this.props.Profile}
-          profileItems={this.props.profileItems}
-          onPageChanged={this.onPageChanged}
-          isFetching={this.props.isFetching}
-          follow={this.props.follow}
-          Unfollow={this.props.Unfollow}
-        />
+        <Users {...this.props} />
       </>
     );
   }
