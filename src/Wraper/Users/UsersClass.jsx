@@ -1,20 +1,25 @@
-import * as axios from "axios";
 import React from "react";
 import "./UsersStyle.css";
 import Users from "./Users";
-
+import {
+  toogleFetching,
+  setCurrentPage,
+  setUsers,
+  follow,
+  Unfollow,
+  isFollowUp,
+  isUnFollowUp,
+} from "../../Redux/UsersReducer";
 import PreloaderItem from "../../commond/Preloader";
-import { componentDidMountAxios, onPageChangedAxios } from "../../API/api";
-//this.props.currentPage  this.props.pageSize
+import {
+  getUsersThunkCreator,
+  onPageChangedThunk,
+} from "../../Redux/UsersReducer";
+import { connect } from "react-redux";
+
 class UsersClass extends React.Component {
   componentDidMount() {
-    this.props.toogleFetching(true);
-    componentDidMountAxios(this.props.currentPage, this.props.pageSize).then(
-      (data) => {
-        this.props.setUsers(data);
-        this.props.toogleFetching(false);
-      }
-    );
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
 
   follow = (id) => {
@@ -25,23 +30,38 @@ class UsersClass extends React.Component {
   };
 
   onPageChanged = (pageNumber) => {
-    this.props.setCurrentPage(pageNumber);
-    this.props.toogleFetching(true);
-
-    onPageChangedAxios(pageNumber, this.props.pageSize).then((data) => {
-      this.props.setUsers(data);
-      this.props.toogleFetching(false);
-    });
+    this.props.onPageChangedThunk(pageNumber, this.props.pageSize);
   };
 
   render() {
     return (
       <>
         {this.props.Profile.isFetching ? <PreloaderItem /> : null}
-        <Users {...this.props} />
+        <Users {...this.props} onPageChanged={this.onPageChanged} />
       </>
     );
   }
 }
 
-export default UsersClass;
+let MapStateToProps = (state) => {
+  return {
+    profileItems: state.Users.ProfileItems,
+    Profile: state.Users,
+    pageSize: state.Users.pageSize,
+    totalCount: state.Users.totalCount,
+    currentPage: state.Users.currentPage,
+    isFetching: state.Users.isFetching,
+    isFollow: state.Users.isFollow,
+  };
+};
+export default connect(MapStateToProps, {
+  follow,
+  Unfollow,
+  toogleFetching,
+  setCurrentPage,
+  setUsers,
+  isFollowUp,
+  isUnFollowUp,
+  getUsers: getUsersThunkCreator,
+  onPageChangedThunk,
+})(UsersClass);

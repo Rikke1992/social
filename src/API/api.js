@@ -8,20 +8,19 @@ const Instanse = axios.create({
   },
 });
 
-export const onPageChangedAxios = (pageNumber = 1, pageSize = 10) => {
-  console.log(pageNumber, pageSize);
-  return Instanse.get(`users?page=${pageNumber}&count=${pageSize}`).then(
-    (response) => {
-      console.log(response);
-      return response.data;
-    }
-  );
-};
-
-export const componentDidMountAxios = (currentPage = 1, pageSize = 10) => {
-  return Instanse.get(`users?page=${currentPage}&count=${pageSize}`).then(
-    (response) => {
-      return response.data;
-    }
-  );
+export const usersAPI = {
+  onPageChangedAxios(pageNumber = 1, pageSize = 10) {
+    return Instanse.get(`users?page=${pageNumber}&count=${pageSize}`).then(
+      (response) => {
+        return response.data;
+      }
+    );
+  },
+  componentDidMountAxios(currentPage = 1, pageSize = 10) {
+    return Instanse.get(`users?page=${currentPage}&count=${pageSize}`).then(
+      (response) => {
+        return response.data;
+      }
+    );
+  },
 };

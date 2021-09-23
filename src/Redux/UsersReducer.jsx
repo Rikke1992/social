@@ -1,3 +1,5 @@
+import { usersAPI } from "../API/api";
+
 let initialState = {
   ProfileItems: [],
   postValue: "",
@@ -6,6 +8,26 @@ let initialState = {
   currentPage: 1,
   isFetching: true,
   isFollow: [],
+};
+
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(toogleFetching(true));
+    usersAPI.componentDidMountAxios(currentPage, pageSize).then((data) => {
+      dispatch(setUsers(data));
+      dispatch(toogleFetching(false));
+    });
+  };
+};
+export const onPageChangedThunk = (pageNumber, pageSize) => {
+  return (dispatch) => {
+    dispatch(setCurrentPage(pageNumber));
+    dispatch(toogleFetching(true));
+    usersAPI.onPageChangedAxios(pageNumber, pageSize).then((data) => {
+      dispatch(setUsers(data));
+      dispatch(toogleFetching(false));
+    });
+  };
 };
 
 const UsersReducer = (state = initialState, action) => {
@@ -119,9 +141,9 @@ export const toogleFetching = (itemFetching) => ({
   type: "toogleFetching",
   fetching: itemFetching,
 });
-export const setCurrentPage = (item) => ({
+export const setCurrentPage = (page) => ({
   type: "setCurrentPage",
-  page: item,
+  page,
 });
 export const setUsers = (newState) => ({ type: "setUsers", newState });
 

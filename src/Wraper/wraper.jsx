@@ -8,6 +8,7 @@ import PostContainer from "./Post/PostContainer";
 import DialogsContainer from "./Dialos/Message/DialogsContainer";
 import UsersContainer from "./Users/UsersContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
+import UsersClass from "./Users/UsersClass";
 
 const Wraper = (props) => {
   return (
@@ -24,7 +25,7 @@ const Wraper = (props) => {
         <Route
           path="/Users"
           render={() => {
-            return <UsersContainer />;
+            return <UsersClass />;
           }}
         />
 
