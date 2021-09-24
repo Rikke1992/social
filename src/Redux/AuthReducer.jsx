@@ -1,8 +1,22 @@
+import { usersAPI } from "../API/api";
+
 let initialState = {
   isAuth: false,
   user: null,
   email: null,
   userID: null,
+};
+
+export const authMeThunk = () => {
+  return (dispatch) => {
+    usersAPI.authMe().then((respons) => {
+      if (respons.data.resultCode === 0) {
+        let { id, email, login } = respons.data.data;
+        dispatch(SetUserData(id, email, login));
+        dispatch(isAuth(true));
+      }
+    });
+  };
 };
 
 const AuthReducer = (state = initialState, action) => {

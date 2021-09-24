@@ -1,6 +1,21 @@
+import { usersAPI } from "../API/api";
+
 let initialState = {
   isFetching: true,
   user: null,
+};
+
+export const profileComponentDidMountThunk = (userId) => {
+  return (dispatch) => {
+    if (!userId) {
+      userId = 19743;
+    }
+    dispatch(toogleFetching(true));
+    usersAPI
+      .profileComponentDidMount(userId)
+      .then((response) => dispatch(SetProfile(response.data)))
+      .then(() => dispatch(toogleFetching(false)));
+  };
 };
 
 const ProfileReducer = (state = initialState, action) => {

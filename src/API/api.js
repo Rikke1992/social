@@ -9,6 +9,11 @@ const Instanse = axios.create({
 });
 
 export const usersAPI = {
+  profileComponentDidMount(userId) {
+    return Instanse.get(`profile/  ${userId}`).then((respons) => {
+      return respons;
+    });
+  },
   onPageChangedAxios(pageNumber = 1, pageSize = 10) {
     return Instanse.get(`users?page=${pageNumber}&count=${pageSize}`).then(
       (response) => {
@@ -22,5 +27,10 @@ export const usersAPI = {
         return response.data;
       }
     );
+  },
+  authMe() {
+    return Instanse.get("auth/me").then((response) => {
+      return response;
+    });
   },
 };

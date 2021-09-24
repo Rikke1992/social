@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import { connect } from "react-redux";
 import * as axios from "axios";
 import UsersClass from "./UsersClass";
@@ -76,3 +76,4 @@ const UsersContainer = connect(MapStateToProps, {
 })(UsersClass);
 
 export default UsersContainer;
+ */
