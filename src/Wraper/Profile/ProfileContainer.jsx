@@ -32,11 +32,15 @@ class ProfileContainer extends React.Component {
     this.props.toogleFetching(false); */
   }
   render() {
-    return (
-      <>
-        <Profile {...this.props} />
-      </>
-    );
+    if (!this.props.Profile.isFetching) {
+      return (
+        <>
+          <Profile {...this.props} />
+        </>
+      );
+    } else {
+      return <PreloaderItem />;
+    }
   }
 }
 
