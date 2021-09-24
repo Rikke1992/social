@@ -16,11 +16,62 @@ import {
   onPageChangedThunk,
 } from "../../Redux/UsersReducer";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 class UsersClass extends React.Component {
   componentDidMount() {
     this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
+  usersCount = () => {
+    return Math.ceil(this.props.totalCount / this.props.pageSize);
+  };
+  pages = () => {
+    let pages = [];
+    for (let i = 1; i <= this.usersCount(); i++) {
+      pages.push(i);
+    }
+
+    return pages;
+  };
+  pagesMap = (
+    usersCountEl = this.usersCount(),
+    pages = this.pages(),
+    currentPage = this.props.currentPage
+  ) => {
+    return (
+      <div>
+        {pages.map((item) => {
+          if (
+            item == currentPage - 1 ||
+            item == currentPage ||
+            item == currentPage + 1
+          ) {
+            return (
+              <span
+                className={item === currentPage ? "strong" : "normal"}
+                onClick={() => {
+                  this.onPageChanged(item);
+                }}
+              >
+                {item}
+              </span>
+            );
+          } else if (usersCountEl - item == 0) {
+            return (
+              <span
+                className={item === currentPage ? "strong" : "normal"}
+                onClick={() => {
+                  this.onPageChanged(item);
+                }}
+              >
+                ...{usersCountEl}
+              </span>
+            );
+          }
+        })}
+      </div>
+    );
+  };
 
   follow = (id) => {
     this.props.follow(id);
@@ -34,10 +85,17 @@ class UsersClass extends React.Component {
   };
 
   render() {
+    if (!this.props.isAuth) return <Redirect to={"/login"} />;
     return (
       <>
         {this.props.Profile.isFetching ? <PreloaderItem /> : null}
-        <Users {...this.props} onPageChanged={this.onPageChanged} />
+        <Users
+          {...this.props}
+          onPageChanged={this.onPageChanged}
+          usersCount={this.usersCount}
+          pages={this.pages}
+          pagesMap={this.pagesMap}
+        />
       </>
     );
   }
@@ -52,6 +110,7 @@ let MapStateToProps = (state) => {
     currentPage: state.Users.currentPage,
     isFetching: state.Users.isFetching,
     isFollow: state.Users.isFollow,
+    isAuth: state.Auth.isAuth,
   };
 };
 export default connect(MapStateToProps, {

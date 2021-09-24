@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as axios from "axios";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import PreloaderItem from "../../commond/Preloader";
 import {
   profileComponentDidMountThunk,
@@ -9,7 +9,6 @@ import {
   toogleFetching,
 } from "../../Redux/ProfileReducer";
 import Profile from "./Profile";
-import { usersAPI } from "../../API/api";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -32,6 +31,7 @@ class ProfileContainer extends React.Component {
     this.props.toogleFetching(false); */
   }
   render() {
+    if (!this.props.isAuth) return <Redirect to={"/login"} />;
     if (!this.props.Profile.isFetching) {
       return (
         <>
@@ -45,7 +45,7 @@ class ProfileContainer extends React.Component {
 }
 
 let MapStateToProps = (state) => {
-  return { Profile: state.Profile };
+  return { Profile: state.Profile, isAuth: state.Auth.isAuth };
 };
 
 export default connect(MapStateToProps, {

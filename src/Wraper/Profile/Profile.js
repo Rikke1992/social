@@ -1,5 +1,5 @@
 import React from "react";
-import PreloaderItem from "../../commond/Preloader";
+
 
 const Profile = (props) => {
   /* return !props.Profile.isFetching ? (

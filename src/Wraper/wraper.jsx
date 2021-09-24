@@ -9,6 +9,7 @@ import DialogsContainer from "./Dialos/Message/DialogsContainer";
 import UsersContainer from "./Users/UsersContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
 import UsersClass from "./Users/UsersClass";
+import Login from "./Login/login";
 
 const Wraper = (props) => {
   return (
@@ -40,6 +41,12 @@ const Wraper = (props) => {
           path="/post"
           render={() => {
             return <PostContainer />;
+          }}
+        />
+        <Route
+          path="/login"
+          render={() => {
+            return <Login />;
           }}
         />
       </wraper>

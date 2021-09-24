@@ -2,7 +2,21 @@ import { usersAPI } from "../API/api";
 
 let initialState = {
   isFetching: true,
-  user: null,
+  user: {
+    aboutMe: null,
+    contacts: {
+      facebook: null,
+      website: null,
+      vk: null,
+      twitter: null,
+      instagram: null,
+    },
+    fullName: "Vladimirp300",
+    lookingForAJob: false,
+    lookingForAJobDescription: null,
+    photos: { small: null, large: null },
+    userId: 19743,
+  },
 };
 
 export const profileComponentDidMountThunk = (userId) => {

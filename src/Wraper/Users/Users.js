@@ -1,19 +1,20 @@
 import React from "react";
 
 import Preloader from "./../../Image/Preloader.gif";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import axios from "axios";
 
 const Users = (props) => {
-  let usersCount = Math.ceil(props.totalCount / props.pageSize);
+  /* let usersCount = Math.ceil(props.totalCount / props.pageSize);
   let pages = [];
   for (let i = 1; i <= usersCount; i++) {
     pages.push(i);
-  }
-
+  } */
+  
   return (
     <div>
-      <div>
+      {props.pagesMap()}
+      {/* <div>
         {pages.map((item) => {
           if (
             item == props.currentPage - 1 ||
@@ -43,8 +44,7 @@ const Users = (props) => {
             );
           }
         })}
-      </div>
-
+      </div> */}
       {props.profileItems.map((item) => {
         return (
           <div>
