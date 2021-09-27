@@ -1,6 +1,5 @@
 import "./App.css";
 import HeaderContainer from "./Header/HeaderContainer";
-
 import Wraper from "./Wraper/wraper.jsx";
 
 function App(props) {

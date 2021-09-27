@@ -10,7 +10,7 @@ const Users = (props) => {
   for (let i = 1; i <= usersCount; i++) {
     pages.push(i);
   } */
-  
+
   return (
     <div>
       {props.pagesMap()}
