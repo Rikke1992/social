@@ -2,6 +2,7 @@ import { usersAPI } from "../API/api";
 
 let initialState = {
   isFetching: true,
+  status: null,
   user: {
     aboutMe: null,
     contacts: {

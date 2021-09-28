@@ -10,27 +10,15 @@ import {
 } from "../../Redux/ProfileReducer";
 import Profile from "./Profile";
 import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
+import { compose } from "redux";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId;
-    /* if (!userId) {
-      userId = 19743;
-    } */
-    /* this.props.toogleFetching(true); */
 
     this.props.profileComponentDidMountThunk(userId);
-
-    /*  usersAPI
-      .profileComponentDidMount(userId)
-      .then((response) => this.props.SetProfile(response.data));
-    this.props.toogleFetching(false); */
-
-    /*  axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-      .then((response) => this.props.SetProfile(response.data));
-    this.props.toogleFetching(false); */
   }
+
   render() {
     if (!this.props.Profile.isFetching) {
       return (
@@ -48,10 +36,12 @@ let MapStateToProps = (state) => {
   return { Profile: state.Profile };
 };
 
-export default WithAuthRedirect(
+export default compose(
+  WithAuthRedirect,
   connect(MapStateToProps, {
     SetProfile,
     toogleFetching,
     profileComponentDidMountThunk,
-  })(withRouter(ProfileContainer))
-);
+  }),
+  withRouter
+)(ProfileContainer);

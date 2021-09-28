@@ -18,6 +18,7 @@ import {
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
+import { compose } from "redux";
 
 class UsersClass extends React.Component {
   componentDidMount() {
@@ -113,7 +114,8 @@ let MapStateToProps = (state) => {
   };
 };
 
-export default WithAuthRedirect(
+export default compose(
+  WithAuthRedirect,
   connect(MapStateToProps, {
     follow,
     Unfollow,
@@ -124,5 +126,5 @@ export default WithAuthRedirect(
     isUnFollowUp,
     getUsers: getUsersThunkCreator,
     onPageChangedThunk,
-  })(UsersClass)
-);
+  })
+)(UsersClass);
