@@ -9,11 +9,6 @@ const Instanse = axios.create({
 });
 
 export const usersAPI = {
-  profileComponentDidMount(userId) {
-    return Instanse.get(`profile/  ${userId}`).then((respons) => {
-      return respons;
-    });
-  },
   onPageChangedAxios(pageNumber = 1, pageSize = 10) {
     return Instanse.get(`users?page=${pageNumber}&count=${pageSize}`).then(
       (response) => {
@@ -28,9 +23,26 @@ export const usersAPI = {
       }
     );
   },
+};
+export const authAPI = {
   authMe() {
     return Instanse.get("auth/me").then((response) => {
       return response;
+    });
+  },
+};
+export const profileAPI = {
+  profileGetUsers(userId) {
+    return Instanse.get(`profile/  ${userId}`).then((respons) => {
+      return respons;
+    });
+  },
+  profilePutStatus(status) {
+    return Instanse.put(`profile/status`, { status: status });
+  },
+  profileGetStatus(userId) {
+    return Instanse.get(`profile/status/${userId}`).then((respons) => {
+      return respons;
     });
   },
 };

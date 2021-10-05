@@ -1,4 +1,4 @@
-import { usersAPI } from "../API/api";
+import { authAPI } from "../API/api";
 
 let initialState = {
   isAuth: false,
@@ -9,7 +9,7 @@ let initialState = {
 
 export const authMeThunk = () => {
   return (dispatch) => {
-    usersAPI.authMe().then((respons) => {
+    authAPI.authMe().then((respons) => {
       if (respons.data.resultCode === 0) {
         let { id, email, login } = respons.data.data;
         dispatch(SetUserData(id, email, login));

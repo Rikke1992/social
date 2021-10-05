@@ -4,9 +4,10 @@ import * as axios from "axios";
 import { withRouter, Redirect } from "react-router-dom";
 import PreloaderItem from "../../commond/Preloader";
 import {
-  profileComponentDidMountThunk,
+  profileGetThunk,
   SetProfile,
   toogleFetching,
+  profileGetStatusThunk,
 } from "../../Redux/ProfileReducer";
 import Profile from "./Profile";
 import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
@@ -16,7 +17,8 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId;
 
-    this.props.profileComponentDidMountThunk(userId);
+    this.props.profileGetThunk(userId);
+    this.props.profileGetStatusThunk(userId);
   }
 
   render() {
@@ -33,15 +35,16 @@ class ProfileContainer extends React.Component {
 }
 
 let MapStateToProps = (state) => {
-  return { Profile: state.Profile };
+  return { Profile: state.Profile, status: state.Profile.status };
 };
 
 export default compose(
-  WithAuthRedirect,
+  // WithAuthRedirect, !!! after testing, use this HOC!
   connect(MapStateToProps, {
     SetProfile,
     toogleFetching,
-    profileComponentDidMountThunk,
+    profileGetThunk,
+    profileGetStatusThunk,
   }),
   withRouter
 )(ProfileContainer);
