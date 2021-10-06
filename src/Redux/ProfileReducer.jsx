@@ -35,6 +35,25 @@ export const profileGetStatusThunk = (userId) => {
       .then(() => dispatch(toogleFetching(false)));
   };
 };
+
+export const profilePutStatusThunk = (status) => {
+  return (dispatch) => {
+    dispatch(toogleFetching(true));
+    profileAPI
+      .profilePutStatus(status)
+      .then((respons) => {
+        if ((respons.data.status == 0 || 200) && respons.resultCode != 1) {
+          dispatch(GetStatus(status));
+        } else if (respons.resultCode == 1) {
+          dispatch(GetStatus(respons.messages));
+        } else {
+          dispatch(GetStatus("status absent"));
+        }
+      })
+      .then(() => dispatch(toogleFetching(false)));
+  };
+};
+
 export const profileGetThunk = (userId) => {
   return (dispatch) => {
     if (!userId) {
@@ -43,7 +62,17 @@ export const profileGetThunk = (userId) => {
     dispatch(toogleFetching(true));
     profileAPI
       .profileGetUsers(userId)
-      .then((response) => dispatch(SetProfile(response.data)))
+      .then((response) => dispatch(SetProfile(response.data)));
+
+    profileAPI
+      .profileGetStatus(userId)
+      .then((respons) => {
+        if (respons.status == 200) {
+          dispatch(GetStatus(respons.data));
+        } else {
+          dispatch(GetStatus("status absent"));
+        }
+      })
       .then(() => dispatch(toogleFetching(false)));
   };
 };

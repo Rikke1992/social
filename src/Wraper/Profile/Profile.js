@@ -6,7 +6,12 @@ const Profile = (props) => {
     <div>
       <span>{props.Profile.user.fullName}</span>
       <img src={props.Profile.user.photos.large}></img>
-      <ProfileStatus {...props} status={props.status} state={props.state} />
+      <ProfileStatus
+        {...props}
+        status={props.status}
+        state={props.state}
+        profilePutStatusThunk={props.profilePutStatusThunk}
+      />
     </div>
   );
 };

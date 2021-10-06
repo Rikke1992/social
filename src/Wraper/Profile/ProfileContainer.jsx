@@ -8,6 +8,7 @@ import {
   SetProfile,
   toogleFetching,
   profileGetStatusThunk,
+  profilePutStatusThunk,
 } from "../../Redux/ProfileReducer";
 import Profile from "./Profile";
 import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
@@ -18,14 +19,17 @@ class ProfileContainer extends React.Component {
     let userId = this.props.match.params.userId;
 
     this.props.profileGetThunk(userId);
-    this.props.profileGetStatusThunk(userId);
+    /* this.props.profileGetStatusThunk(userId); */
   }
 
   render() {
     if (!this.props.Profile.isFetching) {
       return (
         <>
-          <Profile {...this.props} />
+          <Profile
+            {...this.props}
+            profilePutStatusThunk={this.props.profilePutStatusThunk}
+          />
         </>
       );
     } else {
@@ -45,6 +49,7 @@ export default compose(
     toogleFetching,
     profileGetThunk,
     profileGetStatusThunk,
+    profilePutStatusThunk,
   }),
   withRouter
 )(ProfileContainer);

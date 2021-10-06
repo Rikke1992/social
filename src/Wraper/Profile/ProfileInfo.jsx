@@ -16,13 +16,14 @@ class ProfileStatus extends React.Component {
   activateEditMode = () => {
     this.setState({
       editMode: false,
-      status: this.state.status,
     });
   };
-  DeactivateEditMode = () => {
+  DeactivateEditMode = (e) => {
+    let value = e.currentTarget.value;
     this.setState({
       editMode: true,
     });
+    this.props.profilePutStatusThunk(value);
   };
 
   render() {
@@ -37,7 +38,7 @@ class ProfileStatus extends React.Component {
         <div>
           <input
             onChange={this.element}
-            onDoubleClick={this.DeactivateEditMode}
+            onBlur={this.DeactivateEditMode}
             value={this.state.status}
           ></input>
         </div>
