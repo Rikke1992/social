@@ -9,7 +9,7 @@ const Profile = (props) => {
       <ProfileStatus
         {...props}
         status={props.status}
-        state={props.state}
+        /* state={props.state} */
         profilePutStatusThunk={props.profilePutStatusThunk}
       />
     </div>

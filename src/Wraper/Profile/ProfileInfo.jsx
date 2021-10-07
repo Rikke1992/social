@@ -25,7 +25,11 @@ class ProfileStatus extends React.Component {
     });
     this.props.profilePutStatusThunk(value);
   };
-
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.status != prevState.status) {
+      this.setState({ status: this.props.status });
+    }
+  }
   render() {
     if (this.state.editMode) {
       return (

@@ -19,7 +19,7 @@ class ProfileContainer extends React.Component {
     let userId = this.props.match.params.userId;
 
     this.props.profileGetThunk(userId);
-    /* this.props.profileGetStatusThunk(userId); */
+    this.props.profileGetStatusThunk(userId);
   }
 
   render() {
@@ -28,7 +28,7 @@ class ProfileContainer extends React.Component {
         <>
           <Profile
             {...this.props}
-            profilePutStatusThunk={this.props.profilePutStatusThunk}
+            /*  profilePutStatusThunk={this.props.profilePutStatusThunk} */
           />
         </>
       );

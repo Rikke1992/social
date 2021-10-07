@@ -62,9 +62,9 @@ export const profileGetThunk = (userId) => {
     dispatch(toogleFetching(true));
     profileAPI
       .profileGetUsers(userId)
-      .then((response) => dispatch(SetProfile(response.data)));
+      .then((response) => dispatch(SetProfile(response.data)))
 
-    profileAPI
+      /*  profileAPI
       .profileGetStatus(userId)
       .then((respons) => {
         if (respons.status == 200) {
@@ -72,7 +72,7 @@ export const profileGetThunk = (userId) => {
         } else {
           dispatch(GetStatus("status absent"));
         }
-      })
+      }) */
       .then(() => dispatch(toogleFetching(false)));
   };
 };
