@@ -26,7 +26,7 @@ class ProfileStatus extends React.Component {
     this.props.profilePutStatusThunk(value);
   };
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.status != prevState.status) {
+    if (prevProps.status !== this.props.status) {
       this.setState({ status: this.props.status });
     }
   }
