@@ -2,7 +2,7 @@ import { profileAPI } from "../API/api";
 
 let initialState = {
   isFetching: true,
-  status: "",
+  status: "_",
   user: {
     aboutMe: null,
     contacts: {
