@@ -1,10 +1,24 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import { Field, reduxForm } from "redux-form";
+
+const PostForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <Field placeholder={"post"} component={"input"} name={"postInput"} />
+      <button>Accept</button>
+    </form>
+  );
+};
+
+const PostReduxForm = reduxForm({ form: "post" })(PostForm);
 
 const Post = (props) => {
   /* if (!props.isAuth) return <Redirect to={"/login"} />; */
-  let newPostElement = React.createRef();
 
+  const onSubmit = (formData) => {
+    props.newPost(formData.postInput);
+  };
   let renderPost = () => {
     let render = props.Post.postItem.map((item) => {
       return (
@@ -17,23 +31,10 @@ const Post = (props) => {
     return render;
   };
 
-  let onChange = () => {
-    let value = newPostElement.current.value;
-    props.onChange(value);
-  };
-  let addPost = () => {
-    props.Newtext();
-  };
   return (
     <div>
       <div>{renderPost()}</div>
-      <input
-        type="text"
-        ref={newPostElement}
-        onChange={onChange}
-        value={props.postValue}
-      />
-      <button onClick={addPost}>Post</button>
+      <PostReduxForm onSubmit={onSubmit} />
     </div>
   );
 };
