@@ -2,9 +2,8 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { Input } from "../../commond/FormsControls/FormsControl";
 import { maxLengthCreator, required } from "../../utils/validators/validator";
-
+const MaxLengthCreator10 = maxLengthCreator(10);
 const loginForm = (props) => {
-  const MaxLengthCreator10 = maxLengthCreator(10);
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -12,7 +11,7 @@ const loginForm = (props) => {
           placeholder={"Login"}
           name={"login"}
           component={Input}
-          validate={[required /* MaxLengthCreator10 */]}
+          validate={[required, MaxLengthCreator10]}
         />
       </div>
       <div>
@@ -21,7 +20,7 @@ const loginForm = (props) => {
           name={"password"}
           /*  type={"password"} */
           component={Input}
-          validate={[required /* MaxLengthCreator10 */]}
+          validate={[required, MaxLengthCreator10]}
         />
       </div>
       <div>
