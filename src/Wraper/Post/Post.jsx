@@ -1,11 +1,19 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
+import { Textarea } from "../../commond/FormsControls/FormsControl";
+import { maxLengthCreator, required } from "../../utils/validators/validator";
 
+const maxLengthCreator10 = maxLengthCreator(10);
 const PostForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <Field placeholder={"post"} component={"input"} name={"postInput"} />
+      <Field
+        placeholder={"post"}
+        component={Textarea}
+        name={"postInput"}
+        validate={[required, maxLengthCreator10]}
+      />
       <button>Accept</button>
     </form>
   );
