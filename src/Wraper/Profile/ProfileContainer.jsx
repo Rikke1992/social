@@ -43,7 +43,7 @@ let MapStateToProps = (state) => {
 };
 
 export default compose(
-  // WithAuthRedirect, !!! after testing, use this HOC!
+  WithAuthRedirect,
   connect(MapStateToProps, {
     SetProfile,
     toogleFetching,

@@ -3,7 +3,12 @@ import "./Header.module.css";
 import Header from "./Header.jsx";
 import axios from "axios";
 import { connect } from "react-redux";
-import { SetUserData, isAuth, authMeThunk } from "./../Redux/AuthReducer";
+import {
+  SetUserData,
+  isAuth,
+  authMeThunk,
+  logoutThunk,
+} from "./../Redux/AuthReducer";
 import { usersAPI } from "../API/api";
 
 class HeaderContainer extends React.Component {
@@ -34,16 +39,19 @@ class HeaderContainer extends React.Component {
     return (
       <Header
         {...this.props}
-        isAuth={this.props.isAuth}
+        IsAuth={this.props.IsAuth}
         login={this.props.login}
       />
     );
   }
 }
 let mapStateToProps = (state) => {
-  return { isAuth: state.Auth.isAuth, login: state.Auth.login };
+  return { IsAuth: state.Auth.isAuth, login: state.Auth.login };
 };
 
-export default connect(mapStateToProps, { SetUserData, isAuth, authMeThunk })(
-  HeaderContainer
-);
+export default connect(mapStateToProps, {
+  SetUserData,
+  isAuth,
+  authMeThunk,
+  logoutThunk,
+})(HeaderContainer);

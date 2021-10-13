@@ -30,6 +30,12 @@ export const authAPI = {
       return response;
     });
   },
+  login(email, password, rememderMe = false) {
+    return Instanse.post("auth/login", { email, password, rememderMe });
+  },
+  logout() {
+    return Instanse.delete("auth/login");
+  },
 };
 export const profileAPI = {
   profileGetUsers(userId) {

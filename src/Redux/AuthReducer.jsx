@@ -12,8 +12,28 @@ export const authMeThunk = () => {
     authAPI.authMe().then((respons) => {
       if (respons.data.resultCode === 0) {
         let { id, email, login } = respons.data.data;
-        dispatch(SetUserData(id, email, login));
+        dispatch(SetUserData(id, email, login, true));
         dispatch(isAuth(true));
+      }
+    });
+  };
+};
+
+export const loginThunk = (email, password, rememderMe) => {
+  return (dispatch) => {
+    authAPI.login(email, password, rememderMe).then((respons) => {
+      if (respons.data.resultCode === 0) {
+        dispatch(authMeThunk());
+      }
+    });
+  };
+};
+
+export const logoutThunk = () => {
+  return (dispatch) => {
+    authAPI.logout().then((respons) => {
+      if (respons.data.resultCode === 0) {
+        dispatch(SetUserData(null, null, null, false));
       }
     });
   };
@@ -23,7 +43,7 @@ const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SetUserData":
       {
-        let newState = { ...state, ...action.data };
+        let newState = { ...state, ...action.payload };
 
         return newState;
       }
@@ -41,9 +61,9 @@ const AuthReducer = (state = initialState, action) => {
     }
   }
 };
-export const SetUserData = (userID, email, login) => ({
+export const SetUserData = (userID, email, login, isAuth) => ({
   type: "SetUserData",
-  data: { userID, email, login },
+  payload: { userID, email, login, isAuth },
 });
 export const isAuth = (isAuth) => ({
   type: "isAuth",
