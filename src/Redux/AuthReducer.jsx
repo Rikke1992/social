@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { authAPI } from "../API/api";
 
 let initialState = {
@@ -20,10 +21,23 @@ export const authMeThunk = () => {
 };
 
 export const loginThunk = (email, password, rememderMe) => {
+  /* let action = stopSubmit("login", { email: "email or password iswrong" });
+  dispatch(action);
+  return; */
   return (dispatch) => {
     authAPI.login(email, password, rememderMe).then((respons) => {
       if (respons.data.resultCode === 0) {
         dispatch(authMeThunk());
+      } else {
+        let message =
+          respons.data.messages.length > 0
+            ? respons.data.messages[0]
+            : "some error";
+        dispatch(
+          stopSubmit("login", {
+            _error: message,
+          })
+        );
       }
     });
   };

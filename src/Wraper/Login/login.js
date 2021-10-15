@@ -5,13 +5,15 @@ import { Input } from "../../commond/FormsControls/FormsControl";
 import { loginThunk } from "./../../Redux/AuthReducer";
 import { maxLengthCreator, required } from "../../utils/validators/validator";
 import { Redirect } from "react-router";
+import style from "./../../commond/FormsControls/Style.module.css";
+
 const MaxLengthCreator30 = maxLengthCreator(30);
 const loginForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
         <Field
-          placeholder={"Login"}
+          placeholder={"email"}
           name={"email"}
           component={Input}
           validate={[required, MaxLengthCreator30]}
@@ -31,6 +33,9 @@ const loginForm = (props) => {
       </div>
       <div>
         <button>Login</button>
+        {props.error && (
+          <div className={style.formControlSummaryError}>{props.error}</div>
+        )}
       </div>
     </form>
   );

@@ -12,11 +12,11 @@ let initialState = {
       twitter: null,
       instagram: null,
     },
-    fullName: "Vladimirp300",
+    fullName: null,
     lookingForAJob: false,
     lookingForAJobDescription: null,
     photos: { small: null, large: null },
-    userId: 19743,
+    userId: null,
   },
 };
 
@@ -56,23 +56,14 @@ export const profilePutStatusThunk = (status) => {
 
 export const profileGetThunk = (userId) => {
   return (dispatch) => {
-    if (!userId) {
+    /* if (!userId) {
       userId = 19743;
-    }
+    } */
     dispatch(toogleFetching(true));
     profileAPI
       .profileGetUsers(userId)
       .then((response) => dispatch(SetProfile(response.data)))
 
-      /*  profileAPI
-      .profileGetStatus(userId)
-      .then((respons) => {
-        if (respons.status == 200) {
-          dispatch(GetStatus(respons.data));
-        } else {
-          dispatch(GetStatus("status absent"));
-        }
-      }) */
       .then(() => dispatch(toogleFetching(false)));
   };
 };
