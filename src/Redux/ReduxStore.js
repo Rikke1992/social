@@ -4,6 +4,7 @@ import DialogReducerRender from "./DialogReducerRender";
 import PostsReducer from "./PostsReducer";
 import ProfileReducer from "./ProfileReducer";
 import UsersReducer from "./UsersReducer";
+import AppReducer from "./AppReducer";
 import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
 
@@ -13,6 +14,7 @@ let reducers = combineReducers({
   Users: UsersReducer,
   Profile: ProfileReducer,
   Auth: AuthReducer,
+  App: AppReducer,
   form: formReducer,
 });
 

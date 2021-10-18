@@ -1,6 +1,5 @@
 import React, { Profiler } from "react";
 import { connect } from "react-redux";
-import * as axios from "axios";
 import { withRouter, Redirect } from "react-router-dom";
 import PreloaderItem from "../../commond/Preloader";
 import {

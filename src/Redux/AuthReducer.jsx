@@ -14,7 +14,6 @@ export const authMeThunk = () => {
       if (respons.data.resultCode === 0) {
         let { id, email, login } = respons.data.data;
         dispatch(SetUserData(id, email, login, true));
-        dispatch(isAuth(true));
       }
     });
   };
