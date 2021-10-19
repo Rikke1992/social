@@ -8,6 +8,7 @@ import { authAppMeThunk } from "./Redux/AppReducer";
 
 import { withRouter, Redirect } from "react-router-dom";
 import Wraper from "./Wraper/wraper.jsx";
+import PreloaderItem from "./commond/Preloader";
 /* 
 function App(props) {
   return (
@@ -21,13 +22,12 @@ function App(props) {
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.authAppMeThunk().then(() => {
-      if (!this.props.autorizate) {
-        alert("zopka");
-      }
-    });
+    this.props.authAppMeThunk();
   }
   render() {
+    if (!this.props.autorizate) {
+      return <PreloaderItem />;
+    }
     return (
       <div className="App">
         <HeaderContainer />

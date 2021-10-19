@@ -22,7 +22,7 @@ const PostForm = (props) => {
 const PostReduxForm = reduxForm({ form: "post" })(PostForm);
 
 const Post = (props) => {
-  /* if (!props.isAuth) return <Redirect to={"/login"} />; */
+  /*  if (!props.isAuth) return <Redirect to={"/login"} />; */
 
   const onSubmit = (formData) => {
     props.newPost(formData.postInput);

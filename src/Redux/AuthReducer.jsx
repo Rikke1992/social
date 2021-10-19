@@ -8,21 +8,17 @@ let initialState = {
   userID: null,
 };
 
-export const authMeThunk = () => {
-  return (dispatch) => {
-    authAPI.authMe().then((respons) => {
-      if (respons.data.resultCode === 0) {
-        let { id, email, login } = respons.data.data;
-        dispatch(SetUserData(id, email, login, true));
-      }
-    });
-  };
+export const authMeThunk = () => (dispatch) => {
+  return authAPI.authMe().then((respons) => {
+    if (respons.data.resultCode === 0) {
+      let { id, email, login } = respons.data.data;
+      dispatch(SetUserData(id, email, login, true));
+    } /* else {
+      dispatch(SetUserData(null, null, null, false));
+    } */
+  });
 };
-
 export const loginThunk = (email, password, rememderMe) => {
-  /* let action = stopSubmit("login", { email: "email or password iswrong" });
-  dispatch(action);
-  return; */
   return (dispatch) => {
     authAPI.login(email, password, rememderMe).then((respons) => {
       if (respons.data.resultCode === 0) {

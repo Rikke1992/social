@@ -1,12 +1,13 @@
 import { stopSubmit } from "redux-form";
 import { authAPI } from "../API/api";
+import { authMeThunk } from "./AuthReducer";
 
 let initialState = {
   autorizate: false,
 };
 
-export const authAppMeThunk = () => {
-  return (dispatch) => {
+/* export const authAppMeThunk = () => {
+  (dispatch) => {
     return authAPI.authMe().then((respons) => {
       if (respons.data.resultCode === 0) {
         let { id, email, login } = respons.data.data;
@@ -15,10 +16,19 @@ export const authAppMeThunk = () => {
     });
   };
 };
+ */
+
+export const authAppMeThunk = () => (dispatch) => {
+  let promiseAuth = dispatch(authMeThunk());
+
+  promiseAuth.then(() => {
+    dispatch(isAuthAPP(true));
+  });
+};
 
 const AppReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "isAuth":
+    case "isAuthAPP":
       {
         let newState = { ...state, autorizate: action.isAuth };
 
@@ -32,8 +42,8 @@ const AppReducer = (state = initialState, action) => {
   }
 };
 
-export const isAuth = (isAuth) => ({
-  type: "isAuth",
+export const isAuthAPP = (isAuth) => ({
+  type: "isAuthAPP",
   isAuth,
 });
 
