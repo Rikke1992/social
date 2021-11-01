@@ -12,6 +12,11 @@ import {
 import Profile from "./Profile";
 import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
 import { compose } from "redux";
+import {
+  ProfileSelector,
+  ProfileSelectorAutorizedId,
+  ProfileSelectorStatus,
+} from "./../../selectors/ProfileSelector";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -43,9 +48,13 @@ class ProfileContainer extends React.Component {
 
 let MapStateToProps = (state) => {
   return {
-    Profile: state.Profile,
+    /* Profile: state.Profile,
     status: state.Profile.status,
-    autorizedId: state.Auth.userID,
+    autorizedId: state.Auth.userID, */
+
+    Profile: ProfileSelector(state),
+    status: ProfileSelectorStatus(state),
+    autorizedId: ProfileSelectorAutorizedId(state),
   };
 };
 

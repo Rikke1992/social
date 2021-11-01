@@ -13,9 +13,10 @@ export const authMeThunk = () => (dispatch) => {
     if (respons.data.resultCode === 0) {
       let { id, email, login } = respons.data.data;
       dispatch(SetUserData(id, email, login, true));
-    } /* else {
+    } else {
       dispatch(SetUserData(null, null, null, false));
-    } */
+      return false;
+    }
   });
 };
 export const loginThunk = (email, password, rememderMe) => {

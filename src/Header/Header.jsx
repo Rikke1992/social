@@ -18,7 +18,7 @@ const Header = (props) => {
             <button onClick={props.logoutThunk}>OUT</button>
           </div>
         ) : (
-          <NavLink to={"/login"}>loginName</NavLink>
+          <NavLink to={"/login"}>login</NavLink>
         )}
       </div>
     </header>

@@ -14,26 +14,6 @@ import { usersAPI } from "../API/api";
 class HeaderContainer extends React.Component {
   componentDidMount() {
     this.props.authMeThunk();
-
-    /* usersAPI.authMe().then((respons) => {
-      if (respons.data.resultCode === 0) {
-        let { id, email, login } = respons.data.data;
-        this.props.SetUserData(id, email, login);
-        this.props.isAuth(true);
-      }
-    }); */
-
-    /* axios
-      .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-        withCredentials: true,
-      })
-      .then((respons) => {
-        if (respons.data.resultCode === 0) {
-          let { id, email, login } = respons.data.data;
-          this.props.SetUserData(id, email, login);
-          this.props.isAuth(true);
-        }
-      }); */
   }
   render() {
     return (
