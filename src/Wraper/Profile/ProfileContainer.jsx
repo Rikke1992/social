@@ -8,6 +8,7 @@ import {
   toogleFetching,
   profileGetStatusThunk,
   profilePutStatusThunk,
+  updatePhotoThunk,
 } from "../../Redux/ProfileReducer";
 import Profile from "./Profile";
 import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
@@ -19,7 +20,7 @@ import {
 } from "./../../selectors/ProfileSelector";
 
 class ProfileContainer extends React.Component {
-  componentDidMount() {
+  refreshProfile() {
     let userId = this.props.match.params.userId;
 
     if (!userId) {
@@ -30,13 +31,26 @@ class ProfileContainer extends React.Component {
     this.props.profileGetStatusThunk(userId);
   }
 
+  componentDidMount() {
+    this.refreshProfile();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.match.params.userId != prevProps.match.params.userId) {
+      this.refreshProfile();
+    }
+  }
+  updatePhoto = (photo) => {
+    this.props.updatePhotoThunk(photo);
+  };
+
   render() {
     if (!this.props.Profile.isFetching) {
       return (
         <>
           <Profile
             {...this.props}
-            /*  profilePutStatusThunk={this.props.profilePutStatusThunk} */
+            isOwner={this.props.match.params.userId ? false : true}
+            updatePhoto={this.updatePhoto}
           />
         </>
       );
@@ -48,10 +62,6 @@ class ProfileContainer extends React.Component {
 
 let MapStateToProps = (state) => {
   return {
-    /* Profile: state.Profile,
-    status: state.Profile.status,
-    autorizedId: state.Auth.userID, */
-
     Profile: ProfileSelector(state),
     status: ProfileSelectorStatus(state),
     autorizedId: ProfileSelectorAutorizedId(state),
@@ -66,6 +76,7 @@ export default compose(
     profileGetThunk,
     profileGetStatusThunk,
     profilePutStatusThunk,
+    updatePhotoThunk,
   }),
   withRouter
 )(ProfileContainer);

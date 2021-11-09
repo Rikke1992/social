@@ -4,12 +4,6 @@ let state = {
   status: "_",
 };
 
-/* it("new post should be added", () => {
-  let action = PutStatus("12");
-
-  let newState = ProfileReducer(state, action);
-  expect(newState.status.length).toBe(2);
-}); */
 const ProfileReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ChengeStatus":

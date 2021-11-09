@@ -20,6 +20,17 @@ let initialState = {
   },
 };
 
+export const updatePhotoThunk = (photo) => {
+  return (dispatch) => {
+    profileAPI.profileUpdatePhoto(photo).then((respons) => {
+      if (respons.status == 200) {
+        dispatch(updatePhoto(photo));
+      } else {
+        console.log("respons>>>>" + respons);
+      }
+    });
+  };
+};
 export const profileGetStatusThunk = (userId) => {
   return (dispatch) => {
     dispatch(toogleFetching(true));
@@ -56,9 +67,6 @@ export const profilePutStatusThunk = (status) => {
 
 export const profileGetThunk = (userId) => {
   return (dispatch) => {
-    /* if (!userId) {
-      userId = 19743;
-    } */
     dispatch(toogleFetching(true));
     profileAPI
       .profileGetUsers(userId)
@@ -70,12 +78,19 @@ export const profileGetThunk = (userId) => {
 
 const ProfileReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "updatePhoto":
+      {
+        let newState = { ...state, photos: { ...state.user.photos } };
+        newState.user.photos = action.photo;
+
+        return newState;
+      }
+      break;
     case "GetStatus":
       {
         let newState = { ...state };
         newState.status = action.status;
 
-        console.log("action>>>>>" + action.status);
         return newState;
       }
       break;
@@ -103,6 +118,12 @@ const ProfileReducer = (state = initialState, action) => {
   }
 };
 
+export const updatePhoto = (photo) => {
+  return {
+    type: "updatePhoto",
+    photo,
+  };
+};
 export const PutStatus = (status) => {
   return {
     type: "PutStatus",
