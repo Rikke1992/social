@@ -51,4 +51,13 @@ export const profileAPI = {
       return respons;
     });
   },
+  profileUpdatePhoto(photo) {
+    const formData = new FormData();
+    formData.append("image", photo);
+    return Instanse.put("/profile/photo", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
 };
