@@ -5,6 +5,7 @@ import { Redirect } from "react-router";
 let MapStateToPropsForRedirect = (state) => {
   return { isAuth: state.Auth.isAuth };
 };
+
 export const WithAuthRedirect = (Component) => {
   class RedirectComponent extends React.Component {
     render() {
@@ -13,8 +14,5 @@ export const WithAuthRedirect = (Component) => {
     }
   }
 
-  let ConnectedAuthRedirectComponent = connect(MapStateToPropsForRedirect)(
-    RedirectComponent
-  );
-  return ConnectedAuthRedirectComponent;
+  return connect(MapStateToPropsForRedirect)(RedirectComponent);
 };

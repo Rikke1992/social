@@ -1,20 +1,18 @@
 import React from "react";
 import ProfileStatus from "./ProfileInfo";
+import ProfileStatusWithHooks from "./ProfileInfoWithHooks";
 
 const Profile = (props) => {
-  /* return !props.Profile.isFetching ? (
-    <div>
-      <span>{props.Profile.user.fullName}</span>
-      <img src={props.Profile.user.photos.large}></img>
-    </div>
-  ) : (
-    <PreloaderItem />
-  ); */
+  console.log("ProfileSelector>>>>" + props.ProfileSelector);
   return (
     <div>
       <span>{props.Profile.user.fullName}</span>
       <img src={props.Profile.user.photos.large}></img>
-      <ProfileStatus profileStatus={"hello my friends"} state={props.state} />
+      <ProfileStatusWithHooks
+        {...props}
+        status={props.status}
+        profilePutStatusThunk={props.profilePutStatusThunk}
+      />
     </div>
   );
 };

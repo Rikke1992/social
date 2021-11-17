@@ -1,29 +1,43 @@
 import React, { Profiler } from "react";
 import { connect } from "react-redux";
-import * as axios from "axios";
 import { withRouter, Redirect } from "react-router-dom";
 import PreloaderItem from "../../commond/Preloader";
 import {
-  profileComponentDidMountThunk,
+  profileGetThunk,
   SetProfile,
   toogleFetching,
+  profileGetStatusThunk,
+  profilePutStatusThunk,
 } from "../../Redux/ProfileReducer";
 import Profile from "./Profile";
 import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
 import { compose } from "redux";
+import {
+  ProfileSelector,
+  ProfileSelectorAutorizedId,
+  ProfileSelectorStatus,
+} from "./../../selectors/ProfileSelector";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId;
 
-    this.props.profileComponentDidMountThunk(userId);
+    if (!userId) {
+      userId = this.props.autorizedId;
+    }
+
+    this.props.profileGetThunk(userId);
+    this.props.profileGetStatusThunk(userId);
   }
 
   render() {
     if (!this.props.Profile.isFetching) {
       return (
         <>
-          <Profile {...this.props} />
+          <Profile
+            {...this.props}
+            /*  profilePutStatusThunk={this.props.profilePutStatusThunk} */
+          />
         </>
       );
     } else {
@@ -33,7 +47,15 @@ class ProfileContainer extends React.Component {
 }
 
 let MapStateToProps = (state) => {
-  return { Profile: state.Profile };
+  return {
+    /* Profile: state.Profile,
+    status: state.Profile.status,
+    autorizedId: state.Auth.userID, */
+
+    Profile: ProfileSelector(state),
+    status: ProfileSelectorStatus(state),
+    autorizedId: ProfileSelectorAutorizedId(state),
+  };
 };
 
 export default compose(
@@ -41,7 +63,9 @@ export default compose(
   connect(MapStateToProps, {
     SetProfile,
     toogleFetching,
-    profileComponentDidMountThunk,
+    profileGetThunk,
+    profileGetStatusThunk,
+    profilePutStatusThunk,
   }),
   withRouter
 )(ProfileContainer);

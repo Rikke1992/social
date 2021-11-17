@@ -1,4 +1,5 @@
-import { usersAPI } from "../API/api";
+import { stopSubmit } from "redux-form";
+import { authAPI } from "../API/api";
 
 let initialState = {
   isAuth: false,
@@ -7,13 +8,42 @@ let initialState = {
   userID: null,
 };
 
-export const authMeThunk = () => {
+export const authMeThunk = () => (dispatch) => {
+  return authAPI.authMe().then((respons) => {
+    if (respons.data.resultCode === 0) {
+      let { id, email, login } = respons.data.data;
+      dispatch(SetUserData(id, email, login, true));
+    } else {
+      dispatch(SetUserData(null, null, null, false));
+      return false;
+    }
+  });
+};
+export const loginThunk = (email, password, rememderMe) => {
   return (dispatch) => {
-    usersAPI.authMe().then((respons) => {
+    authAPI.login(email, password, rememderMe).then((respons) => {
       if (respons.data.resultCode === 0) {
-        let { id, email, login } = respons.data.data;
-        dispatch(SetUserData(id, email, login));
-        dispatch(isAuth(true));
+        dispatch(authMeThunk());
+      } else {
+        let message =
+          respons.data.messages.length > 0
+            ? respons.data.messages[0]
+            : "some error";
+        dispatch(
+          stopSubmit("login", {
+            _error: message,
+          })
+        );
+      }
+    });
+  };
+};
+
+export const logoutThunk = () => {
+  return (dispatch) => {
+    authAPI.logout().then((respons) => {
+      if (respons.data.resultCode === 0) {
+        dispatch(SetUserData(null, null, null, false));
       }
     });
   };
@@ -23,7 +53,7 @@ const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SetUserData":
       {
-        let newState = { ...state, ...action.data };
+        let newState = { ...state, ...action.payload };
 
         return newState;
       }
@@ -41,9 +71,9 @@ const AuthReducer = (state = initialState, action) => {
     }
   }
 };
-export const SetUserData = (userID, email, login) => ({
+export const SetUserData = (userID, email, login, isAuth) => ({
   type: "SetUserData",
-  data: { userID, email, login },
+  payload: { userID, email, login, isAuth },
 });
 export const isAuth = (isAuth) => ({
   type: "isAuth",

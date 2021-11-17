@@ -115,7 +115,7 @@ let MapStateToProps = (state) => {
 };
 
 export default compose(
-  WithAuthRedirect,
+  // WithAuthRedirect, !!! after testing, use this HOC!
   connect(MapStateToProps, {
     follow,
     Unfollow,
